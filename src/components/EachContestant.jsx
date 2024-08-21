@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 import { motion } from "framer-motion";
+import VoteCalculator from "./VoteCalculator";
+const EachContestant = ({ contestant }) => {
+  const [showVoteCalculator, setShowVoteCalculator] = useState(false);
 
-const EachContestant = () => {
+  const handleVoteClick = () => {
+    setShowVoteCalculator(true);
+    console.log('clicked');
+  };
+
+  const handleCloseModal = () => {
+    setShowVoteCalculator(false);
+    console.log('closed');
+  };
+
   return (
     <div className="">
       <div className="bg-customBlue dark:bg-customOrange px-4 md:px-1 shadow-sm shadow-gray-400 overflow-hidden pt-3">
@@ -14,12 +26,12 @@ const EachContestant = () => {
             transition={{ type: "spring", stiffness: 100, damping: 20 }}
           >
             <img
-              src="/src/images/contestant.png"
+              src={contestant ? `http://localhost:3000/${contestant.profilePic}` : ''}
               alt=""
               className="w-full h-full object-cover md:px-1 px-8 lg:px-0"
             />
             <p className="absolute bottom-16 left-1/2 transform -translate-x-1/2 text-center text-customBlack font-semibold text-xl">
-              Ella Marvel
+              {contestant ? contestant.username : ''}
             </p>
           </motion.div>
 
@@ -42,9 +54,9 @@ const EachContestant = () => {
                 text="Vote"
                 bgColor="bg-customOrange dark:bg-customBlack"
                 textColor="text-white"
-                link=""
+                onClick={handleVoteClick} 
               />
-              <p>Click the Button to vote for Ella</p>
+              <p>Click the Button to vote for {contestant.username}</p>
             </div>
           </motion.div>
 
@@ -56,15 +68,31 @@ const EachContestant = () => {
           >
             <div className="h-20 w-20 rounded-full overflow-hidden ">
               <img
-                src="/src/images/face1.jpeg"
+                src={contestant ? `http://localhost:3000/${contestant.coverPic}` : ''}
                 alt=""
                 className="w-full h-full object-cover"
               />
             </div>
-            <h3>Ella Marvel</h3>
+            <h3>{contestant ? contestant.username : ''}</h3>
           </motion.div>
         </div>
       </div>
+
+      {showVoteCalculator && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full">
+            <VoteCalculator contestant={contestant}/>
+            <div className="text-right mt-4">
+              <button
+                onClick={handleCloseModal}
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

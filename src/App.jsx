@@ -13,6 +13,10 @@ import Contact from './pages/Contact';
 import Shop from './pages/Shop';
 import Cart from './pages/Cart';
 import HistoryPage from './pages/HistoryPage';
+import Login from './pages/Login';
+import VerifyEmail from './pages/VerifyEmail';
+import CompleteRegistrationPage from './pages/CompleteRegistrationPage';
+import Loader from './components/Loader';
 
 function App() {
   useEffect(() => {
@@ -28,13 +32,14 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/magazine" element={<Magazine />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/contestants" element={<Contestant />} />
-        <Route path="/contestantpage" element={<ContestantPage />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/history" element={<HistoryPage />} />
-        {/* Add more routes here */}
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/complete-registration" element={<CompleteRegistrationPage />} />
+        <Route path="/invite/:username" element={<Contestant />} />
+        <Route path="/shop/*" element={<Shop />} /> 
+        <Route path="/contestantpage" element={<ContestantPage />} />
+        <Route path="/loader" element={<Loader />} />
       </Routes>
     </BrowserRouter>
   );

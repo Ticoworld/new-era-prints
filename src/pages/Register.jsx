@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Toast from "../../utils/utils";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [fullname, setFullname] = useState("");
@@ -12,6 +15,112 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Error state for validation
+  const [errorFullname, setErrorFullname] = useState("");
+  const [errorUsername, setErrorUsername] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPhoneNumber, setErrorPhoneNumber] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
+  const [errorAgreeToTerms, setErrorAgreeToTerms] = useState("");
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const navigate = useNavigate();
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    // Reset all error messages before validation
+    setErrorFullname("");
+    setErrorUsername("");
+    setErrorEmail("");
+    setErrorPhoneNumber("");
+    setErrorPassword("");
+    setErrorConfirmPassword("");
+    setErrorAgreeToTerms("");
+
+    // Basic validation
+    if (!fullname) setErrorFullname("Full name is required");
+    if (!username) setErrorUsername("Username is required");
+    if (!email) setErrorEmail("Email is required");
+    if (!phoneNumber) setErrorPhoneNumber("Phone number is required");
+    if (!password) setErrorPassword("Password is required");
+    if (password !== confirmPassword)
+      setErrorConfirmPassword("Passwords do not match");
+    if (!agreeToTerms) setErrorAgreeToTerms("You must agree to the terms");
+
+    // Check if there are any validation errors
+    if (
+      !fullname ||
+      !username ||
+      !email ||
+      !phoneNumber ||
+      !password ||
+      password !== confirmPassword ||
+      !agreeToTerms
+    ) {
+      return; // Exit if there are errors
+    }
+
+    // Proceed to fetch request if validation passes
+    try {
+      const response = await fetch("http://localhost:3000/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullname,
+          username,
+          email,
+          phoneNumber,
+          state,
+          role,
+          password,
+          agreeToTerms,
+        }),
+      });
+    
+      const res = await response.json();  // Parse the response
+    
+      if (res.success === true) {
+        // Store the user's email in localStorage to use during verification
+        localStorage.setItem("email", email);
+    
+        // Display success message
+        Toast.fire({
+          icon: "success",
+          title: "Registration Successful",
+          text: "You have been registered successfully! Please check your email to verify your account.",
+        });
+    
+        // Redirect to the verify-email page
+        navigate('/verify-email');
+      } else {
+        // Handle failed registration
+        Toast.fire({
+          icon: "error",  // Update the icon to 'error' instead of 'failed'
+          title: "Registration Failed",
+          text: res.message || "Your registration failed. Please check your connection and try again.",
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    
+      // Handle network or server error
+      Toast.fire({
+        icon: "error",
+        title: "Error",
+        text: "Something went wrong. Please try again later.",
+      });
+    }
+  };
 
   return (
     <div>
@@ -32,11 +141,9 @@ const Register = () => {
             <h2 className="text-3xl font-bold mb-6 text-customBlack">
               REGISTRATION
             </h2>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleRegister}>
               <div>
-                <label className="block text-customBlack mb-2">
-                  Full Name
-                </label>
+                <label className="block text-customBlack mb-2">Full Name</label>
                 <input
                   type="text"
                   placeholder="Full Name"
@@ -44,11 +151,12 @@ const Register = () => {
                   onChange={(e) => setFullname(e.target.value)}
                   className="w-full input-style bg-customBlue text-white py-3 px-4 rounded-md"
                 />
+                {errorFullname && (
+                  <p className="text-red-500 text-sm">{errorFullname}</p>
+                )}
               </div>
               <div>
-                <label className="block text-customBlack mb-2">
-                  Username
-                </label>
+                <label className="block text-customBlack mb-2">Username</label>
                 <input
                   type="text"
                   placeholder="Username"
@@ -56,11 +164,12 @@ const Register = () => {
                   onChange={(e) => setUsername(e.target.value)}
                   className="w-full input-style bg-customBlue text-white py-3 px-4 rounded-md"
                 />
+                {errorUsername && (
+                  <p className="text-red-500 text-sm">{errorUsername}</p>
+                )}
               </div>
               <div>
-                <label className="block text-customBlack mb-2">
-                  Email
-                </label>
+                <label className="block text-customBlack mb-2">Email</label>
                 <input
                   type="email"
                   placeholder="Email"
@@ -68,6 +177,9 @@ const Register = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full input-style bg-customBlue text-white py-3 px-4 rounded-md"
                 />
+                {errorEmail && (
+                  <p className="text-red-500 text-sm">{errorEmail}</p>
+                )}
               </div>
               <div>
                 <label className="block text-customBlack mb-2">
@@ -80,15 +192,17 @@ const Register = () => {
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   className="w-full input-style bg-customBlue text-white py-3 px-4 rounded-md"
                 />
+                {errorPhoneNumber && (
+                  <p className="text-red-500 text-sm">{errorPhoneNumber}</p>
+                )}
               </div>
               <div>
-                <label className="block text-customBlack mb-2">
-                  State
-                </label>
+                <label className="block text-customBlack mb-2">State</label>
                 <select
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                   className="w-full input-style bg-customBlue text-white py-3 px-4 rounded-md">
+                  {/* Add other options if needed */}
                   <option value="Abia">Abia</option>
                   <option value="Adamawa">Adamawa</option>
                   <option value="Akwa Ibom">Akwa Ibom</option>
@@ -128,41 +242,57 @@ const Register = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-customBlack mb-2">
-                  Role
-                </label>
+                <label className="block text-customBlack mb-2">Role</label>
                 <select
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                   className="w-full input-style bg-customBlue text-white py-3 px-4 rounded-md">
                   <option value="Contestant">Contestant</option>
+                  <option value="Customer">Customer</option>
                   {/* Add other options if needed */}
                 </select>
               </div>
               <div>
-                <label className="block text-customBlack mb-2">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full input-style bg-customBlue text-white py-3 px-4 rounded-md"
-                />
+                <label className="block text-customBlack mb-2">Password</label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full input-style bg-customBlue text-white py-3 px-4 rounded-md"
+                  />
+                  <span
+                    onClick={togglePasswordVisibility}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-white">
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+                </div>
+                {errorPassword && (
+                  <p className="text-red-500 text-sm">{errorPassword}</p>
+                )}
               </div>
               <div>
-                <label className="block text-customBlack mb-2">
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full input-style bg-customBlue text-white py-3 px-4 rounded-md"
-                />
+                <label className="block text-customBlack mb-2">Confirm Password</label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="w-full input-style bg-customBlue text-white py-3 px-4 rounded-md"
+                  />
+                  <span
+                    onClick={toggleConfirmPasswordVisibility}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-white">
+                    {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+                </div>
+                {errorConfirmPassword && (
+                  <p className="text-red-500 text-sm">{errorConfirmPassword}</p>
+                )}
               </div>
+          
               <div className="flex items-center">
                 <input
                   type="checkbox"
@@ -177,10 +307,14 @@ const Register = () => {
                   I AGREE TO THE TERMS AND CONDITIONS
                 </label>
               </div>
+              {errorAgreeToTerms && (
+                <p className="text-red-500 text-sm">{errorAgreeToTerms}</p>
+              )}
               <button className="w-full bg-customBlue text-white py-3 rounded-md font-semibold">
                 Register
               </button>
             </form>
+            <div className="pt-4"><p>Already have an account? <Link to="/login" className="text-customBlue">Login</Link></p></div> 
           </div>
         </div>
       </div>

@@ -1,8 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHome, FaSignOutAlt, FaTrophy } from "react-icons/fa";
+import Swal from "sweetalert2"; // Optional for logout confirmation
 
 const ContestantHeader = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Optional: Display a confirmation dialog
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Clear token or any user data from storage
+        localStorage.removeItem("token"); // Assuming token is stored in localStorage
+
+        // Navigate to the login page after logout
+        navigate("/login");
+
+        Swal.fire("Logged out", "You have successfully logged out.", "success");
+      }
+    });
+  };
+
   return (
     <header className="bg-white shadow-md py-4 px-6">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -31,13 +57,13 @@ const ContestantHeader = () => {
             <FaTrophy className="mr-2" />
             <span className="hidden md:inline">Leaderboard</span>
           </Link>
-          <Link
-            to="/logout"
+          <button
+            onClick={handleLogout}
             className="flex items-center text-customDark hover:text-customBlue transition"
           >
             <FaSignOutAlt className="mr-2" />
             <span className="hidden md:inline">Logout</span>
-          </Link>
+          </button>
         </nav>
       </div>
     </header>

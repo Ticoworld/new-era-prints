@@ -1,39 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CustomerHeader from "../components/CustomerHeader";
+import Loader from "../components/Loader"; // You can use your own loader component
 
-const HistoryPage = ({}) => {
-  const HistoryItems = [
-    {
-      name: "Business Card Design",
-      date: "2024-08-10",
-      price: 19.99,
-      image: "/images/business-card.jpg", // Replace with your image path
-    },
-    {
-      name: "Flyer Printing",
-      date: "2024-07-25",
-      price: 29.99,
-      image: "/images/flyer.jpg", // Replace with your image path
-    },
-    {
-      name: "T-Shirt Design",
-      date: "2024-07-15",
-      price: 14.99,
-      image: "/images/tshirt.jpg", // Replace with your image path
-    },
-  ];
+const HistoryPage = () => {
+  const [historyItems, setHistoryItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/user/gethistory", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": localStorage.getItem("token"), // Adjust the token retrieval based on your implementation
+          },
+        });
+        const data = await response.json();
+
+        if (response.ok) {
+          setHistoryItems(data.history);
+        } else {
+          setError(data.message || "Failed to fetch history");
+        }
+      } catch (err) {
+        setError("An error occurred while fetching history");
+        console.error("Error fetching history:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHistory();
+  }, []);
+
   return (
-    <div>
-      <CustomerHeader />
-
-      <div className="min-h-screen bg-gray-100 dark:bg-customBlack p-6">
+    <div className="min-h-screen bg-gray-100 dark:bg-customBlack p-6">
+      {loading ? (
+        <Loader /> // Display a loading spinner or indicator
+      ) : (
         <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             Purchase History
           </h2>
-          {HistoryItems.length > 0 ? (
+          {error ? (
+            <p className="text-red-500">{error}</p>
+          ) : historyItems.length > 0 ? (
             <ul className="divide-y divide-gray-200">
-              {HistoryItems.map((item, index) => (
+              {historyItems.map((item, index) => (
                 <li
                   key={index}
                   className="py-4 flex items-center justify-between">
@@ -64,7 +79,7 @@ const HistoryPage = ({}) => {
             <p className="text-gray-600">You have no purchase history.</p>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 };
