@@ -71,7 +71,7 @@ const Register = () => {
 
     // Proceed to fetch request if validation passes
     try {
-      const response = await fetch("http://localhost:3000/user-auth/register", {
+      const response = await fetch("https://new-era-server-five.vercel.app/user-auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

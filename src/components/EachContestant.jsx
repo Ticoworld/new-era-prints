@@ -27,7 +27,7 @@ const EachContestant = ({ contestant }) => {
             transition={{ type: "spring", stiffness: 100, damping: 20 }}
           >
             <img
-              src={contestant ? `http://localhost:3000/${contestant.profilePic}` : ''}
+              src={contestant ? `https://new-era-server-five.vercel.app/${contestant.profilePic}` : ''}
               alt=""
               className="w-full h-full object-cover md:px-1 px-8 lg:px-0"
             />
@@ -69,7 +69,7 @@ const EachContestant = ({ contestant }) => {
           >
             <div className="h-20 w-20 rounded-full overflow-hidden ">
               <img
-                src={contestant ? `http://localhost:3000/${contestant.coverPic}` : ''}
+                src={contestant ? `https://new-era-server-five.vercel.app/${contestant.coverPic}` : ''}
                 alt=""
                 className="w-full h-full object-cover"
               />

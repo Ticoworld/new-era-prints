@@ -14,7 +14,7 @@ const Cart = () => {
       try {
         setLoading(true); // Set loading to true when starting fetch
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:3000/user/getdata`, {
+        const response = await fetch(`https://new-era-server-five.vercel.app/user/getdata`, {
           headers: { 'x-access-token': token },
         });
         const data = await response.json();
@@ -33,7 +33,7 @@ const Cart = () => {
 
   const updateCart = async (updatedCartItems) => {
     const token = localStorage.getItem('token');
-    const response = await fetch(`http://localhost:3000/user/updateCart`, {
+    const response = await fetch(`https://new-era-server-five.vercel.app/user/updateCart`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -9,7 +9,7 @@ const HistoryPage = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await fetch("http://localhost:3000/user/gethistory", {
+        const response = await fetch("https://new-era-server-five.vercel.app/user/gethistory", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

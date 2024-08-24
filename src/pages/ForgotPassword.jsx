@@ -9,7 +9,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/user-auth/forgot-password', {
+      const response = await fetch('https://new-era-server-five.vercel.app/user-auth/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

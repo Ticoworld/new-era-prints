@@ -40,7 +40,7 @@ const CustomerDashboard = () => {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/user/getdata`, {
+        const response = await fetch(`https://new-era-server-five.vercel.app/user/getdata`, {
           headers: {
             'x-access-token': localStorage.getItem('token'), 
           }
@@ -60,7 +60,7 @@ const CustomerDashboard = () => {
   // Add item to cart
   const addToCart = async (item) => {
     try {
-      const response = await fetch(`http://localhost:3000/user/updateCart`, {
+      const response = await fetch(`https://new-era-server-five.vercel.app/user/updateCart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

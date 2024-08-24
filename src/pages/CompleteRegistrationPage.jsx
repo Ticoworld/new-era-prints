@@ -26,7 +26,7 @@ const CompleteRegistrationPage = () => {
         return;
       }
       try {
-        const response = await fetch("http://localhost:3000/contestant/getdata", {
+        const response = await fetch("https://new-era-server-five.vercel.app/contestant/getdata", {
           method: "GET",
           headers: {
             "x-access-token": token,
@@ -71,7 +71,7 @@ const CompleteRegistrationPage = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:3000/contestant-auth/complete-registration", {
+      const response = await fetch("https://new-era-server-five.vercel.app/contestant-auth/complete-registration", {
         method: "POST",
         body: formData,
         headers: {

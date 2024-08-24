@@ -12,7 +12,7 @@ const Contestant = () => {
   useEffect(() => {
     const fetchContestantData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/contestant/invite/${username}`);
+        const response = await fetch(`https://new-era-server-five.vercel.app/contestant/invite/${username}`);
         const result = await response.json();
         if (result.success) {
           setContestant(result.data); // Adjust based on the actual response structure

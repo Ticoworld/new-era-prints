@@ -25,7 +25,7 @@ const CheckoutPage = () => {
       try {
         setLoading(true); // Set loading to true when starting fetch
         const token = localStorage.getItem("token");
-        const response = await fetch(`http://localhost:3000/user/getdata`, {
+        const response = await fetch(`https://new-era-server-five.vercel.app/user/getdata`, {
           headers: { "x-access-token": token },
         });
         const data = await response.json();
@@ -190,7 +190,7 @@ export default CheckoutPage;
 
 //   try {
 //     // Initialize payment
-//     const response = await fetch('http://localhost:3000/payment/initialize-payment', {
+//     const response = await fetch('https://new-era-server-five.vercel.app/payment/initialize-payment', {
 //       method: 'POST',
 //       headers: {
 //         'Content-Type': 'application/json',
@@ -218,12 +218,12 @@ export default CheckoutPage;
 //       onSuccess: async (transaction) => {
 //         // Verify the transaction
 //         try {
-//           const verifyResponse = await fetch(`http://localhost:3000/payment/verify-payment/${transaction.reference}?amount=${amount}`);
+//           const verifyResponse = await fetch(`https://new-era-server-five.vercel.app/payment/verify-payment/${transaction.reference}?amount=${amount}`);
 //           const verifyData = await verifyResponse.json();
 
 //           if (verifyData.success) {
 //             // Update the purchase history
-//             const historyUpdateResponse = await fetch('http://localhost:3000/user/update-history', {
+//             const historyUpdateResponse = await fetch('https://new-era-server-five.vercel.app/user/update-history', {
 //               method: 'POST',
 //               headers: {
 //                 'Content-Type': 'application/json',

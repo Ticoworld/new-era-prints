@@ -16,7 +16,7 @@ export const handlePayment = async (billingAddress, products, total) => {
   try {
     // Initialize payment
     const response = await fetch(
-      "http://localhost:3000/payment/initialize-payment",
+      "https://new-era-server-five.vercel.app/payment/initialize-payment",
       {
         method: "POST",
         headers: {
@@ -47,14 +47,14 @@ export const handlePayment = async (billingAddress, products, total) => {
         try {
           // Verify the transaction
           const verifyResponse = await fetch(
-            `http://localhost:3000/payment/verify-payment/${transaction.reference}?amount=${amount}`
+            `https://new-era-server-five.vercel.app/payment/verify-payment/${transaction.reference}?amount=${amount}`
           );
           const verifyData = await verifyResponse.json();
 
           if (verifyData.success) {
             // Create the order
             const orderResponse = await fetch(
-              "http://localhost:3000/user/createOrder",
+              "https://new-era-server-five.vercel.app/user/createOrder",
               {
                 method: "POST",
                 headers: {
@@ -72,7 +72,7 @@ export const handlePayment = async (billingAddress, products, total) => {
             if (orderResponse.ok) {
               // Clear the cart
               const clearCartResponse = await fetch(
-                "http://localhost:3000/user/clearCart",
+                "https://new-era-server-five.vercel.app/user/clearCart",
                 {
                   method: "POST",
                   headers: {

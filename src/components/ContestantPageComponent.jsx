@@ -54,7 +54,7 @@ const ContestantPageComponent = ({ user }) => {
               <img
                 src={
                   user
-                    ? `http://localhost:3000/${user.profilePic}`
+                    ? `https://new-era-server-five.vercel.app/${user.profilePic}`
                     : "/src/images/contestant.png"
                 }
                 alt="Contestant Profile"

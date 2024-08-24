@@ -11,7 +11,7 @@ const ResetPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/user-auth/reset-password', {
+      const response = await fetch('https://new-era-server-five.vercel.app/user-auth/reset-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

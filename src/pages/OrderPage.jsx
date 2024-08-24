@@ -9,7 +9,7 @@ const OrderPage = () => {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:3000/user/getOrders', {
+        const response = await fetch('https://new-era-server-five.vercel.app/user/getOrders', {
           headers: { 'x-access-token': token },
         });
         const data = await response.json();

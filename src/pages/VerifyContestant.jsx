@@ -24,7 +24,7 @@ const VerifyContestant = () => {
     setLoading(true);
     const role = localStorage.getItem('role');
     try {
-      const response = await fetch("http://localhost:3000/contest-verify/verify-email", {
+      const response = await fetch("https://new-era-server-five.vercel.app/contest-verify/verify-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +91,7 @@ const VerifyContestant = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/contest-verify/resend-otp", {
+      const response = await fetch("https://new-era-server-five.vercel.app/contest-verify/resend-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

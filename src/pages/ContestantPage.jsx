@@ -25,7 +25,7 @@ const ContestantPage = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:3000/contestant/getdata", {
+        const response = await fetch("https://new-era-server-five.vercel.app/contestant/getdata", {
           method: "GET",
           headers: {
             "x-access-token": token,

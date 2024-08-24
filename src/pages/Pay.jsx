@@ -20,7 +20,7 @@ const Pay = () => {
 
     try {
       // Send a request to the backend to initialize the payment
-      const response = await fetch('http://localhost:3000/payment/initialize-payment', {
+      const response = await fetch('https://new-era-server-five.vercel.app/payment/initialize-payment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const Pay = () => {
         access_code: data.accessCode,
         onSuccess: async (transaction) => {
           // Payment was successful, verify it
-          const verificationResponse = await fetch(`http://localhost:3000/payment/verify-payment/${transaction.reference}?amount=${amountInKobo}`);
+          const verificationResponse = await fetch(`https://new-era-server-five.vercel.app/payment/verify-payment/${transaction.reference}?amount=${amountInKobo}`);
           const verificationData = await verificationResponse.json();
 
           if (verificationData.success) {

@@ -24,7 +24,7 @@ const CheckoutPage = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem("Usertoken");
-        const response = await fetch(`http://localhost:3000/user/getdata`, {
+        const response = await fetch(`https://new-era-server-five.vercel.app/user/getdata`, {
           headers: { "x-access-token": token },
         });
         const data = await response.json();

@@ -13,7 +13,7 @@ export const handlePayment = async (email, amount, name, contestantUsername, vot
     });
 
     // Initialize payment
-    const response = await fetch('http://localhost:3000/payment/vote-payment', {
+    const response = await fetch('https://new-era-server-five.vercel.app/payment/vote-payment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export const handlePayment = async (email, amount, name, contestantUsername, vot
 
           // Verify the payment
           try {
-            const verifyResponse = await fetch(`http://localhost:3000/payment/verify-vote-payment/${transaction.reference}?amount=${amount * 100}`, {
+            const verifyResponse = await fetch(`https://new-era-server-five.vercel.app/payment/verify-vote-payment/${transaction.reference}?amount=${amount * 100}`, {
               method: 'GET',
             });
 
@@ -61,7 +61,7 @@ export const handlePayment = async (email, amount, name, contestantUsername, vot
 
             if (result.success) {
               // Update the contestant with the name and number of votes
-              const updateResponse = await fetch('http://localhost:3000/contestant/update-votes', {
+              const updateResponse = await fetch('https://new-era-server-five.vercel.app/contestant/update-votes', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

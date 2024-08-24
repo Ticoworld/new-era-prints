@@ -24,7 +24,7 @@ const VerifyEmail = () => {
     setLoading(true);
     const role = localStorage.getItem('role');
     try {
-      const response = await fetch("http://localhost:3000/verify/verify-email", {
+      const response = await fetch("https://new-era-server-five.vercel.app/verify/verify-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +91,7 @@ const VerifyEmail = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/verify/resend-otp", {
+      const response = await fetch("https://new-era-server-five.vercel.app/verify/resend-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
