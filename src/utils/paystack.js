@@ -59,7 +59,7 @@ export const handlePayment = async (billingAddress, products, total) => {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
-                  "x-access-token": localStorage.getItem("token"),
+                  "x-access-token": localStorage.getItem("Usertoken"),
                 },
                 body: JSON.stringify({
                   billingAddress,
@@ -76,7 +76,7 @@ export const handlePayment = async (billingAddress, products, total) => {
                 {
                   method: "POST",
                   headers: {
-                    "x-access-token": localStorage.getItem("token"),
+                    "x-access-token": localStorage.getItem("Usertoken"),
                   },
                 }
               );

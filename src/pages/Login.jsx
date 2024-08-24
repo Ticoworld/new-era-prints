@@ -21,7 +21,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     // Check if password is empty
     if (password === "") {
       setErrorPassword("Password cannot be empty");
@@ -29,9 +29,9 @@ const Login = () => {
     } else {
       setErrorPassword(""); // Clear the error message
     }
-  
+
     setLoading(true); // Start loading
-  
+
     try {
       const response = await fetch("http://localhost:3000/user-auth/login", {
         method: "POST",
@@ -45,15 +45,15 @@ const Login = () => {
       });
       const res = await response.json();
       setLoading(false);
-  
+
       if (res.success === true) {
-        localStorage.setItem("token", res.token);
+        localStorage.setItem("Usertoken", res.token);
         localStorage.setItem("expiresAt", res.expirationTime * 1000); // Store the expiration time in milliseconds
-          Toast.fire({
-            icon: "success",
-            title: "Login Successful",
-          });
-          navigate("/shop");
+        Toast.fire({
+          icon: "success",
+          title: "Login Successful",
+        });
+        navigate("/shop");
       } else {
         Toast.fire({
           icon: "error",
@@ -65,7 +65,6 @@ const Login = () => {
       console.log({ Error: error });
     }
   };
-  
 
   return (
     <div>
@@ -110,8 +109,7 @@ const Login = () => {
                   />
                   <span
                     onClick={togglePasswordVisibility}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-white"
-                  >
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-white">
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </span>
                 </div>
@@ -125,7 +123,17 @@ const Login = () => {
                 {loading ? "Logging in..." : "Login"}
               </button>
             </form>
-                   <div className="pt-4"><p>Don't have an account? <Link to="/register" className="text-customBlue">Sign up</Link></p></div> 
+            <Link to="/forgot-password" className="text-customBlue pt-2">
+              Forgotten Password?
+            </Link>
+            <div className="pt-4">
+              <p>
+                Don't have an account?{" "}
+                <Link to="/register" className="text-customBlue">
+                  Sign up
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@ const CheckoutPage = () => {
     const fetchCartItems = async () => {
       try {
         setLoading(true);
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("Usertoken");
         const response = await fetch(`http://localhost:3000/user/getdata`, {
           headers: { "x-access-token": token },
         });

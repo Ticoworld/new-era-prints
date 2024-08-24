@@ -13,7 +13,7 @@ const HistoryPage = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "x-access-token": localStorage.getItem("token"), // Adjust the token retrieval based on your implementation
+            "x-access-token": localStorage.getItem("Usertoken"), // Adjust the token retrieval based on your implementation
           },
         });
         const data = await response.json();

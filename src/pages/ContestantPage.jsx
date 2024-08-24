@@ -19,32 +19,47 @@ const ContestantPage = () => {
           text: "Please log in to access this page.",
           timer: 2000,
           showConfirmButton: false,
+          didClose: () => navigate("/contest-login"), // Redirect after Swal closes
         });
-        navigate("/contest-login");
         return;
       }
+
       try {
         const response = await fetch("http://localhost:3000/contestant/getdata", {
           method: "GET",
           headers: {
             "x-access-token": token,
-          }
+          },
         });
         const result = await response.json();
+        console.log(result);
         if (result.success) {
-          if (result.isRegistrationCompleted) {
-            setUser(result);
-            setLoading(false);
+
+          if (result.role === "contestant") {
+            if (result.isRegistrationCompleted) {
+              setUser(result);
+            } else {
+              navigate("/complete-registration");
+            }
           } else {
-            navigate("/complete-registration");
+            Swal.fire({
+              icon: "warning",
+              title: "Unauthorized",
+              text: "You do not have permission to access this page.",
+              timer: 2000,
+              showConfirmButton: false,
+              didClose: () => navigate("/contest-login"), // Redirect after Swal closes
+            });
           }
         } else {
           Swal.fire({
             icon: "error",
             title: "Error",
             text: result.message || "Failed to fetch user data.",
+            timer: 2000,
+            showConfirmButton: false,
+            didClose: () => navigate('/contest-login'), // Redirect after Swal closes
           });
-          navigate('/contest-login')
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -52,7 +67,12 @@ const ContestantPage = () => {
           icon: "error",
           title: "Error",
           text: "An unexpected error occurred.",
+          timer: 2000,
+          showConfirmButton: false,
+          didClose: () => navigate('/contest-login'), // Redirect after Swal closes
         });
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -60,9 +80,19 @@ const ContestantPage = () => {
   }, [navigate]);
 
   if (loading) {
-    return <div>
-      <Loader />
-    </div>;
+    return <Loader />;
+  }
+
+  if (!user || user.role !== "contestant") {
+    Swal.fire({
+      icon: "warning",
+      title: "Access Denied",
+      text: "You do not have permission to access this page.",
+      timer: 2000,
+      showConfirmButton: false,
+      didClose: () => navigate('/contest-login'), // Redirect after Swal closes
+    });
+    return null; // Prevent rendering the rest of the component while redirecting
   }
 
   return (

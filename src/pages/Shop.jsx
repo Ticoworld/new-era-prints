@@ -5,10 +5,9 @@ import CustomerHeader from "../components/CustomerHeader";
 import HistoryPage from "./HistoryPage";
 import Cart from "./Cart";
 import Loader from "../components/Loader";
-import CustomerDashboard from "../components/CustomerDashboard ";
 import CheckoutPage from "./CheckoutPage";
 import OrderPage from "./OrderPage";
-
+import CustomerDashboard from "../components/CustomerDashboard";
 const UserContext = createContext();
 
 export const useUser = () => {
@@ -22,11 +21,11 @@ const isTokenExpired = () => {
 
 const getToken = () => {
   if (isTokenExpired()) {
-    localStorage.removeItem('token');
+    localStorage.removeItem('Usertoken');
     localStorage.removeItem('expiresAt');
     return null;
   }
-  return localStorage.getItem('token');
+  return localStorage.getItem('Usertoken');
 };
 
 const Shop = () => {
@@ -52,61 +51,67 @@ const Shop = () => {
       try {
         const response = await fetch(`http://localhost:3000/user/getdata`, {
           headers: {
-            'x-access-token': token, 
+            'x-access-token': token,
           }
         });
         const data = await response.json();
         if (data.success) {
-          setUser(data)
-        } else {
+          const role = data.role;
+          if (role === "customer") {
+            setUser(data);
+          } else {
             Swal.fire({
               icon: 'warning',
-              title: 'Session Expired',
-              text: 'Your session has expired. Please log in again.',
+              title: 'Unauthorized',
+              text: 'You are not authorized to access this page.',
               timer: 2000,
               showConfirmButton: false,
             });
-            navigate('/login'); // Redirect to login if no valid token
-            return;
+            navigate('/login');
+          }
+        } else {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Session Expired',
+            text: 'Your session has expired. Please log in again.',
+            timer: 2000,
+            showConfirmButton: false,
+          });
+          navigate('/login');
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUser();
+
     const expirationTime = localStorage.getItem('expiresAt');
-    if (!expirationTime) return;
+    if (expirationTime) {
+      const timeLeft = expirationTime - Date.now();
+      const timer = setTimeout(() => {
+        localStorage.removeItem('Usertoken');
+        localStorage.removeItem('expiresAt');
+        Swal.fire({
+          icon: 'warning',
+          title: 'Session Expired',
+          text: 'Your session has expired. Please log in again.',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        navigate('/login');
+      }, timeLeft);
 
-    const timeLeft = expirationTime - Date.now();
-    const timer = setTimeout(() => {
-      localStorage.removeItem('token');
-      localStorage.removeItem('expiresAt');
-      Swal.fire({
-        icon: 'warning',
-        title: 'Session Expired',
-        text: 'Your session has expired. Please log in again.',
-        timer: 2000,
-        showConfirmButton: false,
-      });
-      navigate('/login');
-    }, timeLeft);
-
-    // Cleanup timer on component unmount
-    return () => clearTimeout(timer);
+      // Cleanup timer on component unmount
+      return () => clearTimeout(timer);
+    }
   }, [navigate]);
-
-  useEffect(() => {
-    // Simulate a delay for loading (remove this in production)
-    const timer = setTimeout(() => setLoading(false), 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   if (loading) {
     return <Loader />;
   }
-
 
   const logout = () => {
     Swal.fire({
@@ -119,7 +124,7 @@ const Shop = () => {
       confirmButtonText: "Yes, logout!",
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem("token"); 
+        localStorage.removeItem("Usertoken");
         localStorage.removeItem('expiresAt');
         setUser(null);
         navigate("/login");
@@ -130,21 +135,21 @@ const Shop = () => {
 
   return (
     <UserContext.Provider value={user}>
-      {
-        user ? 
+      {user && user.role === "customer" ? (
         <div>
-      <CustomerHeader logout={logout} />
-        <Routes>
-          <Route path="/" element={<CustomerDashboard />} />
-          <Route path="history" element={<HistoryPage />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="checkout" element={<CheckoutPage />} />
-          <Route path="order" element={<OrderPage />} />
-        </Routes>
-        <Outlet />
-      </div> : <Loader />
-      }
-      
+          <CustomerHeader logout={logout} />
+          <Routes>
+            <Route path="/" element={<CustomerDashboard />} />
+            <Route path="history" element={<HistoryPage />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="checkout" element={<CheckoutPage />} />
+            <Route path="order" element={<OrderPage />} />
+          </Routes>
+          <Outlet />
+        </div>
+      ) : (
+        <Loader />
+      )}
     </UserContext.Provider>
   );
 };
