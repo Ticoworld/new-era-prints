@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ContestantPageComponent from "../components/ContestantPageComponent";
+import Loader from "../components/Loader";
 
 const ContestantPage = () => {
   const [user, setUser] = useState(null);
@@ -19,7 +20,7 @@ const ContestantPage = () => {
           timer: 2000,
           showConfirmButton: false,
         });
-        navigate("/login");
+        navigate("/contest-login");
         return;
       }
       try {
@@ -43,6 +44,7 @@ const ContestantPage = () => {
             title: "Error",
             text: result.message || "Failed to fetch user data.",
           });
+          navigate('/contest-login')
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -58,7 +60,9 @@ const ContestantPage = () => {
   }, [navigate]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>
+      <Loader />
+    </div>;
   }
 
   return (

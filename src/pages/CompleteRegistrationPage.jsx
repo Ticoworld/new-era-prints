@@ -22,11 +22,11 @@ const CompleteRegistrationPage = () => {
           timer: 2000,
           showConfirmButton: false,
         });
-        navigate("/login");
+        navigate("/contest-login");
         return;
       }
       try {
-        const response = await fetch("http://localhost:3000/user/getdata", {
+        const response = await fetch("http://localhost:3000/contestant/getdata", {
           method: "GET",
           headers: {
             "x-access-token": token,
@@ -45,6 +45,7 @@ const CompleteRegistrationPage = () => {
             title: "Error",
             text: result.message || "Failed to fetch user data.",
           });
+          navigate("/contest-login");
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -70,7 +71,7 @@ const CompleteRegistrationPage = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:3000/auth/complete-registration", {
+      const response = await fetch("http://localhost:3000/contestant-auth/complete-registration", {
         method: "POST",
         body: formData,
         headers: {

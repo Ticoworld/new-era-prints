@@ -17,13 +17,13 @@ const FaceOfMagPastYear = ({ bgcolor = 'bg-customBlue' }) => {
                 text="Register"
                 bgColor="bg-customWhite"
                 textColor="text-black"
-                link="/register"
+                link="/contest-register"
               />
               <Button
                 text="Login"
                 bgColor="bg-customWhite"
                 textColor="text-black"
-                link="/login"
+                link="/contest-login"
               />
             </div>
           </div>

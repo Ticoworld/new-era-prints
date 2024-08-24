@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Toast from "../utils/utils";
 
-const Login = () => {
+const ContestLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +33,7 @@ const Login = () => {
     setLoading(true); // Start loading
   
     try {
-      const response = await fetch("http://localhost:3000/user-auth/login", {
+      const response = await fetch("http://localhost:3000/contestant-auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,16 +44,16 @@ const Login = () => {
         }),
       });
       const res = await response.json();
-      setLoading(false);
+      setLoading(false); // Stop loading
   
       if (res.success === true) {
         localStorage.setItem("token", res.token);
-        localStorage.setItem("expiresAt", res.expirationTime * 1000); // Store the expiration time in milliseconds
+        localStorage.setItem("expiresAt", res.expirationTime * 1000);
           Toast.fire({
             icon: "success",
             title: "Login Successful",
           });
-          navigate("/shop");
+          navigate("/contestantpage");
       } else {
         Toast.fire({
           icon: "error",
@@ -75,7 +75,7 @@ const Login = () => {
           {/* Left Section - Image */}
           <div className="hidden lg:block w-1/3 bg-customBlack flex-1">
             <img
-              src="/src/images/login.jpeg"
+              src="/src/images/contest-login.jpeg"
               alt="Login Visual"
               className="w-full h-full object-cover"
             />
@@ -125,7 +125,7 @@ const Login = () => {
                 {loading ? "Logging in..." : "Login"}
               </button>
             </form>
-                   <div className="pt-4"><p>Don't have an account? <Link to="/register" className="text-customBlue">Sign up</Link></p></div> 
+                   <div className="pt-4"><p>Don't have an account? <Link to="/contest-register" className="text-customBlue">Sign up</Link></p></div> 
           </div>
         </div>
       </div>
@@ -134,4 +134,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ContestLogin;

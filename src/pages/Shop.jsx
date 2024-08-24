@@ -6,6 +6,8 @@ import HistoryPage from "./HistoryPage";
 import Cart from "./Cart";
 import Loader from "../components/Loader";
 import CustomerDashboard from "../components/CustomerDashboard ";
+import CheckoutPage from "./CheckoutPage";
+import OrderPage from "./OrderPage";
 
 const UserContext = createContext();
 
@@ -56,6 +58,16 @@ const Shop = () => {
         const data = await response.json();
         if (data.success) {
           setUser(data)
+        } else {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Session Expired',
+              text: 'Your session has expired. Please log in again.',
+              timer: 2000,
+              showConfirmButton: false,
+            });
+            navigate('/login'); // Redirect to login if no valid token
+            return;
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -95,17 +107,44 @@ const Shop = () => {
     return <Loader />;
   }
 
+
+  const logout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("token"); 
+        localStorage.removeItem('expiresAt');
+        setUser(null);
+        navigate("/login");
+        Swal.fire("Logged out", "You have successfully logged out.", "success");
+      }
+    });
+  };
+
   return (
     <UserContext.Provider value={user}>
-      <div>
-        <CustomerHeader />
+      {
+        user ? 
+        <div>
+      <CustomerHeader logout={logout} />
         <Routes>
           <Route path="/" element={<CustomerDashboard />} />
           <Route path="history" element={<HistoryPage />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="order" element={<OrderPage />} />
         </Routes>
         <Outlet />
-      </div>
+      </div> : <Loader />
+      }
+      
     </UserContext.Provider>
   );
 };

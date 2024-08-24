@@ -18,12 +18,9 @@ const ContestantHeader = () => {
       confirmButtonText: "Yes, logout!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // Clear token or any user data from storage
         localStorage.removeItem("token"); // Assuming token is stored in localStorage
-
-        // Navigate to the login page after logout
-        navigate("/login");
-
+        localStorage.removeItem('expiresAt');
+        navigate("/contest-login");
         Swal.fire("Logged out", "You have successfully logged out.", "success");
       }
     });
@@ -44,19 +41,19 @@ const ContestantHeader = () => {
         {/* Links */}
         <nav className="flex space-x-6">
           <Link
-            to="/home"
+            to="/"
             className="flex items-center text-customDark hover:text-customBlue transition"
           >
             <FaHome className="mr-2" />
             <span className="hidden md:inline">Home</span>
           </Link>
-          <Link
+          {/* <Link
             to="/leaderboard"
             className="flex items-center text-customDark hover:text-customBlue transition"
           >
             <FaTrophy className="mr-2" />
             <span className="hidden md:inline">Leaderboard</span>
-          </Link>
+          </Link> */}
           <button
             onClick={handleLogout}
             className="flex items-center text-customDark hover:text-customBlue transition"

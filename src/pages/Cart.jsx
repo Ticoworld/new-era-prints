@@ -144,7 +144,7 @@ const Cart = () => {
                     </p>
                     <button
                       className="mt-2 bg-green-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-green-700 transition"
-                      onClick={() => window.location.href = '/checkout'}
+                      onClick={() => window.location.href = '/shop/checkout'}
                     >
                       Proceed to Checkout
                     </button>

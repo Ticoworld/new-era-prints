@@ -5,7 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Toast from "../utils/utils";
 import { Link, useNavigate } from "react-router-dom";
 
-const Register = () => {
+const ContestRegister = () => {
   const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -71,7 +71,7 @@ const Register = () => {
 
     // Proceed to fetch request if validation passes
     try {
-      const response = await fetch("http://localhost:3000/user-auth/register", {
+      const response = await fetch("http://localhost:3000/contestant-auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -90,8 +90,8 @@ const Register = () => {
       if (res.success === true) {
         // Store the user's email in localStorage to use during verification
         localStorage.setItem("email", email);
-        localStorage.setItem("role", 'customer');
-    
+        localStorage.setItem("role", 'contestant');
+
         // Display success message
         Toast.fire({
           icon: "success",
@@ -100,7 +100,7 @@ const Register = () => {
         });
     
         // Redirect to the verify-email page
-        navigate('/verify-email');
+        navigate('/contest-verify-email');
       } else {
         // Handle failed registration
         Toast.fire({
@@ -303,7 +303,7 @@ const Register = () => {
                 Register
               </button>
             </form>
-            <div className="pt-4"><p>Already have an account? <Link to="/login" className="text-customBlue">Login</Link></p></div> 
+            <div className="pt-4"><p>Already have an account? <Link to="/contest-login" className="text-customBlue">Login</Link></p></div> 
           </div>
         </div>
       </div>
@@ -312,4 +312,7 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default ContestRegister;
+
+
+

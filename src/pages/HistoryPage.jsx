@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import CustomerHeader from "../components/CustomerHeader";
 import Loader from "../components/Loader"; // You can use your own loader component
 
 const HistoryPage = () => {
@@ -51,10 +50,11 @@ const HistoryPage = () => {
               {historyItems.map((item, index) => (
                 <li
                   key={index}
-                  className="py-4 flex items-center justify-between">
+                  className="py-4 flex items-center justify-between"
+                >
                   <div className="flex items-center space-x-4">
                     <img
-                      src={item.image}
+                      src={item.image || "/path/to/placeholder-image.png"}
                       alt={item.name}
                       className="h-16 w-16 object-cover rounded-lg"
                     />
@@ -63,13 +63,13 @@ const HistoryPage = () => {
                         {item.name}
                       </p>
                       <p className="text-sm text-gray-600">
-                        Purchased on: {item.date}
+                        Purchased on: {new Date(item.date).toLocaleDateString()}
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-semibold text-gray-800">
-                      ${item.price.toFixed(2)}
+                      ${(item.amount / 100).toFixed(2)}
                     </p>
                   </div>
                 </li>

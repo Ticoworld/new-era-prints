@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "./Button";
 import { motion } from "framer-motion";
 import VoteCalculator from "./VoteCalculator";
+
 const EachContestant = ({ contestant }) => {
   const [showVoteCalculator, setShowVoteCalculator] = useState(false);
 
@@ -81,7 +82,10 @@ const EachContestant = ({ contestant }) => {
       {showVoteCalculator && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full">
-            <VoteCalculator contestant={contestant}/>
+            <VoteCalculator 
+              contestant={contestant} 
+              onClose={handleCloseModal} 
+            />
             <div className="text-right mt-4">
               <button
                 onClick={handleCloseModal}

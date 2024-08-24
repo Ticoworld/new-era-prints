@@ -17,7 +17,7 @@ const FaceMagazineTwo = () => {
                 text="Register"
                 bgColor="bg-customOrange dark:bg-customBlack"
                 textColor="text-white"
-                link="/register"
+                link="/contest-register"
               />
             </div>
           </div>

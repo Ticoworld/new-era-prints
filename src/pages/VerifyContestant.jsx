@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Toast from "../utils/utils";
 
-const VerifyEmail = () => {
+const VerifyContestant = () => {
   const [otp, setOtp] = useState(""); // Manually entered OTP
   const [loading, setLoading] = useState(false); // Loading state for verification process
   const [resendingOtp, setResendingOtp] = useState(false); // Loading state for OTP resend
@@ -24,7 +24,7 @@ const VerifyEmail = () => {
     setLoading(true);
     const role = localStorage.getItem('role');
     try {
-      const response = await fetch("http://localhost:3000/verify/verify-email", {
+      const response = await fetch("http://localhost:3000/contest-verify/verify-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +91,7 @@ const VerifyEmail = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/verify/resend-otp", {
+      const response = await fetch("http://localhost:3000/contest-verify/resend-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -165,4 +165,5 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+export default VerifyContestant;
+

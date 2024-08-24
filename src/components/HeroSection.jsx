@@ -35,6 +35,8 @@ const HeroSection = ({showcaseImage="/src/images/showcase.png"}) => {
         icon={BsArrowUpRight}
         bgColor="bg-customOrange"
         textColor="text-white"
+        link="/shop"
+
       />
         </motion.div>
 

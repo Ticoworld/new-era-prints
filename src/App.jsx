@@ -17,6 +17,10 @@ import Login from './pages/Login';
 import VerifyEmail from './pages/VerifyEmail';
 import CompleteRegistrationPage from './pages/CompleteRegistrationPage';
 import Loader from './components/Loader';
+import Pay from './pages/Pay';
+import ContestRegister from './pages/ContestRegister';
+import ContestLogin from './pages/ContestLogin';
+import VerifyContestant from './pages/VerifyContestant';
 
 function App() {
   useEffect(() => {
@@ -32,14 +36,18 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/magazine" element={<Magazine />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/contest-register" element={<ContestRegister />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/contest-login" element={<ContestLogin />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/contest-verify-email" element={<VerifyContestant />} />
         <Route path="/complete-registration" element={<CompleteRegistrationPage />} />
         <Route path="/invite/:username" element={<Contestant />} />
         <Route path="/shop/*" element={<Shop />} /> 
         <Route path="/contestantpage" element={<ContestantPage />} />
         <Route path="/loader" element={<Loader />} />
+        <Route path="/pay" element={<Pay />} />
       </Routes>
     </BrowserRouter>
   );

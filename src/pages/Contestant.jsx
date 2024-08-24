@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../components/Header";
 import EachContestant from "../components/EachContestant";
-import ContestLeaderBoard from "../components/ContestLeaderBoard";
 import Swal from "sweetalert2";
 
 const Contestant = () => {
@@ -47,7 +46,6 @@ const Contestant = () => {
     <div>
       <Header />
       {contestant ? <EachContestant contestant={contestant} /> : <div>No contestant available</div>}
-      <ContestLeaderBoard />
     </div>
   );
 };

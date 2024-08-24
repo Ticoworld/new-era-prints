@@ -17,13 +17,13 @@ const FaceMagazineCard = ({bgcolor='bg-customBlue'}) => {
                 text="Register"
                 bgColor="bg-customBlack"
                 textColor="text-white"
-                link="/register"
+                link="/contest-register"
               />
               <Button
                 text="Login"
                 bgColor="bg-customBlack"
                 textColor="text-white"
-                link="/login"
+                link="/contest-login"
               />
             </div>
           </div>

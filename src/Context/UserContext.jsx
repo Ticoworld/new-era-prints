@@ -9,7 +9,7 @@
 //     const token = localStorage.getItem('token');
 //     if (token) {
 //       try {
-//         const response = await fetch('http://localhost:3000/user/getData', {
+//         const response = await fetch('http://localhost:3000//user-auth/getData', {
 //           headers: {
 //             'x-access-token': token,
 //           },
