@@ -129,7 +129,7 @@ const Register = () => {
           {/* Left Section - Image */}
           <div className="hidden lg:block w-1/3 bg-customBlack flex-1">
             <img
-              src="/src/images/register.jpeg"
+              src="/images/register.jpeg"
               alt="Registration Visual"
               className="w-full h-full object-cover"
             />

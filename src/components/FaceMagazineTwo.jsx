@@ -21,7 +21,7 @@ const FaceMagazineTwo = () => {
               />
             </div>
           </div>
-            <img src="/src/images/facemag.png" alt="" className="w-[30rem] object-cover rotate-12"/>
+            <img src="/images/facemag.png" alt="" className="w-[30rem] object-cover rotate-12"/>
         </div>
       </div>
     </div>

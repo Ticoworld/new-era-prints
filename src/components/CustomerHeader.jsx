@@ -51,7 +51,7 @@ const CustomerHeader = ({ logout }) => {
           <GiHamburgerMenu />
         </button>
         <img
-          src="/src/images/logo.png"
+          src="/images/logo.png"
           alt="Logo"
           className="h-8 w-auto sm:h-12"
         />

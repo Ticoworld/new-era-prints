@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div>
       <div className="bg-gray-400 flex items-center justify-between lg:px-32 px-8 py-10">
-        <img src="/src/images/logo.png" alt="" className="w-28" />
+        <img src="/images/logo.png" alt="" className="w-28" />
         <div className="flex items-center gap-5 text-center text-sm text-customBlack">
           <div className="flex flex-col gap-4">
             <Link to="/magazine">

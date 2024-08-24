@@ -37,7 +37,7 @@ const MagazineShowCase = () => {
             transition={{ type: "spring", stiffness: 100, damping: 20 }}
           >
             <img
-              src="/src/images/faceofmag.png"
+              src="/images/faceofmag.png"
               alt=""
               className="w-full h-full object-cover px-8 lg:px-0"
             />

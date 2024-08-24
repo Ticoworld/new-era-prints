@@ -14,9 +14,9 @@ import Footer from "../components/Footer";
 
 // Array of images for the Swiper
 const images = [
-  { id: 1, src: "/src/images/mag2.jpeg", alt: "Magazine Image 1" },
-  { id: 2, src: "/src/images/mag3.jpeg", alt: "Magazine Image 2" },
-  { id: 3, src: "/src/images/mag1.jpeg", alt: "Magazine Image 3" },
+  { id: 1, src: "/images/mag2.jpeg", alt: "Magazine Image 1" },
+  { id: 2, src: "/images/mag3.jpeg", alt: "Magazine Image 2" },
+  { id: 3, src: "/images/mag1.jpeg", alt: "Magazine Image 3" },
 ];
 
 const Magazine = () => {

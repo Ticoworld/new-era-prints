@@ -82,7 +82,7 @@ const Header = () => {
       <div className="flex flex-col lg:flex-row justify-between items-center lg:px-12 px-4">
         <div className="lg:hidden flex justify-between items-center w-full py-4">
           <div className="logo font-kavoon text-xl text-customWhite">
-            <img src="/src/images/logo.png" alt="" className="w-24" />
+            <img src="/images/logo.png" alt="" className="w-24" />
           </div>
           <div className="flex items-center">
             <div className="relative mr-2">
@@ -176,7 +176,7 @@ const Header = () => {
         </nav>
         <div className="hidden lg:flex items-center w-[50%] justify-between">
           <div className="logo font-kavoon text-xl text-customWhite justify-start">
-            <img src="/src/images/logo.png" alt="" className="w-24 " />
+            <img src="/images/logo.png" alt="" className="w-24 " />
           </div>
           <div className="flex">
             <div className="relative ml-4 flex items-center">

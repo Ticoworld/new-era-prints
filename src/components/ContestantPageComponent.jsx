@@ -55,7 +55,7 @@ const ContestantPageComponent = ({ user }) => {
                 src={
                   user
                     ? `https://new-era-server-five.vercel.app/${user.profilePic}`
-                    : "/src/images/contestant.png"
+                    : "/images/contestant.png"
                 }
                 alt="Contestant Profile"
                 className="w-16 h-16 rounded-full object-cover"

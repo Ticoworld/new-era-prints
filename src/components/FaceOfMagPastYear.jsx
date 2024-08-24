@@ -30,7 +30,7 @@ const FaceOfMagPastYear = ({ bgcolor = 'bg-customBlue' }) => {
           <div className="flex items-center justify-center">
             <div className="relative w-[16rem] h-[14rem] -mb-3 lg:w-[30rem] lg:h-[26rem] md:h-[20rem] md:w-[21rem] md:-mb-3 sm:-mb-3 sm:h-[16rem] sm:w-[18rem]  lg:-mt-32 lg:-mb-3 overflow-hidden">
             <img 
-              src="/src/images/face2023.png" 
+              src="/images/face2023.png" 
               alt="" 
               className="w-full h-full object-cover"
               style={{ marginBottom: '', zIndex: 1 }}

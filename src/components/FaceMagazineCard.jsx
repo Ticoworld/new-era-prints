@@ -28,7 +28,7 @@ const FaceMagazineCard = ({bgcolor='bg-customBlue'}) => {
             </div>
           </div>
           <div className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 overflow-hidden rounded-full">
-            <img src="/src/images/face1.jpeg" alt="" className="w-full h-full object-cover"/>
+            <img src="/images/face1.jpeg" alt="" className="w-full h-full object-cover"/>
           </div>
         </div>
       </div>

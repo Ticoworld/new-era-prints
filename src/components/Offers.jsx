@@ -28,20 +28,20 @@ const Offers = () => {
   }, []);
 
   const offersCard = [
-    { id: 1, image: "/src/images/image1.jpeg", title: "Business Cards" },
-    { id: 2, image: "/src/images/image2.jpeg", title: "Marketing Materials" },
-    { id: 3, image: "/src/images/image3.jpeg", title: "Signs & Posters" },
-    { id: 4, image: "/src/images/image4.jpeg", title: "Clothing & Bags" },
-    { id: 5, image: "/src/images/image5.jpeg", title: "Design Services" },
+    { id: 1, image: "/images/image1.jpeg", title: "Business Cards" },
+    { id: 2, image: "/images/image2.jpeg", title: "Marketing Materials" },
+    { id: 3, image: "/images/image3.jpeg", title: "Signs & Posters" },
+    { id: 4, image: "/images/image4.jpeg", title: "Clothing & Bags" },
+    { id: 5, image: "/images/image5.jpeg", title: "Design Services" },
     {
       id: 6,
-      image: "/src/images/image6.jpeg",
+      image: "/images/image6.jpeg",
       title: "Invitations & Stationery",
     },
-    { id: 7, image: "/src/images/image7.jpeg", title: "Labels & Stickers" },
+    { id: 7, image: "/images/image7.jpeg", title: "Labels & Stickers" },
     {
       id: 8,
-      image: "/src/images/image8.jpeg",
+      image: "/images/image8.jpeg",
       title: "Photo Gifts & Calendar",
     },
   ];

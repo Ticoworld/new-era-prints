@@ -4,15 +4,15 @@ import { useState, useEffect } from 'react';
 
 // Array of top-selling items with image names and titles
 const topSellingItems = [
-  { id: 1, img: '/src/images/business_card.jpeg', title: 'Business Cards' },
-  { id: 2, img: '/src/images/brochure.jpeg', title: 'Brochures' },
-  { id: 3, img: '/src/images/flyer.jpeg', title: 'Flyers' },
-  { id: 4, img: '/src/images/poster.jpg', title: 'Posters' },
-  { id: 5, img: '/src/images/banner.jpeg', title: 'Banners' },
-  { id: 6, img: '/src/images/booklet.jpg', title: 'Booklets' },
-  { id: 7, img: '/src/images/invitation.jpeg', title: 'invitation Card' },
-  { id: 8, img: '/src/images/calendar.jpeg', title: 'Calendars' },
-  { id: 9, img: '/src/images/magazine.jpeg', title: 'Magazine' },
+  { id: 1, img: '/images/business_card.jpeg', title: 'Business Cards' },
+  { id: 2, img: '/images/brochure.jpeg', title: 'Brochures' },
+  { id: 3, img: '/images/flyer.jpeg', title: 'Flyers' },
+  { id: 4, img: '/images/poster.jpg', title: 'Posters' },
+  { id: 5, img: '/images/banner.jpeg', title: 'Banners' },
+  { id: 6, img: '/images/booklet.jpg', title: 'Booklets' },
+  { id: 7, img: '/images/invitation.jpeg', title: 'invitation Card' },
+  { id: 8, img: '/images/calendar.jpeg', title: 'Calendars' },
+  { id: 9, img: '/images/magazine.jpeg', title: 'Magazine' },
 ];
 
 

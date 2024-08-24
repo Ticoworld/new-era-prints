@@ -9,19 +9,19 @@ import { Pagination, Autoplay } from "swiper/modules";
 const reviews = [
   {
     id: 1,
-    image: "/src/images/rev1.jpg",
+    image: "/images/rev1.jpg",
     review:
       "Exceptional service and fantastic quality! The team was attentive to our needs and delivered exactly what we wanted. We’re thrilled with the results and highly recommend their services to others.",
   },
   {
     id: 2,
-    image: "/src/images/rev2.jpg",
+    image: "/images/rev2.jpg",
     review:
       "Outstanding experience from start to finish. The attention to detail and professionalism exceeded our expectations. The final product was flawless, and we couldn’t be happier with the outcome.",
   },
   {
     id: 3,
-    image: "/src/images/rev3.jpg",
+    image: "/images/rev3.jpg",
     review:
       "Highly impressed with the prompt service and top-notch quality. The staff were knowledgeable and provided valuable insights. The final deliverable was perfect and on time. Will definitely use their services again.",
   },
