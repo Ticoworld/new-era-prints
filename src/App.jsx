@@ -19,6 +19,7 @@ import ContestLogin from './pages/ContestLogin';
 import VerifyContestant from './pages/VerifyContestant';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword ';
+import NotFound from './pages/Notfound';
 
 function App() {
   useEffect(() => {
@@ -46,6 +47,7 @@ function App() {
         <Route path="/contestantpage" element={<ContestantPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
