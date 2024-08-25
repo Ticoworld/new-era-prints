@@ -42,7 +42,7 @@ const CustomerDashboard = () => {
       try {
         const response = await fetch(`https://new-era-server-five.vercel.app/user/getdata`, {
           headers: {
-            'x-access-token': localStorage.getItem('token'), 
+            'x-access-token': localStorage.getItem('Usertoken'), 
           }
         });
         const data = await response.json();
@@ -64,7 +64,7 @@ const CustomerDashboard = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': localStorage.getItem('token'), // Assuming token is stored in localStorage
+          'x-access-token': localStorage.getItem('Usertoken'), // Assuming token is stored in localStorage
         },
         body: JSON.stringify({
           cartItems: [...cart, item], // Add the new item to the current cart
