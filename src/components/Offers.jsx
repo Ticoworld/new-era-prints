@@ -101,6 +101,7 @@ const Offers = () => {
           ))}
         </motion.div>
       </div>
+
       <Link to="/shop">
         <h1
           className="font-semibold text-customBlue text-center pt-10 cursor-pointer"
@@ -108,6 +109,7 @@ const Offers = () => {
           LETS GET STARTED
         </h1>
       </Link>
+      
     </div>
   );
 };
