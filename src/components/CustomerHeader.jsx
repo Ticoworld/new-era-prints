@@ -59,7 +59,7 @@ const CustomerHeader = ({ logout }) => {
       {/* Hide welcome message on smaller screens */}
       <h1 className="hidden lg:block text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-200">
         Welcome,{" "}
-        <span className="text-customBlack">{user ? user.username : ""}!</span>
+        <span className="text-customBlack dark:text-customWhite">{user ? user.username : ""}!</span>
       </h1>
       <nav className="hidden lg:flex space-x-4 items-center">
         <Link

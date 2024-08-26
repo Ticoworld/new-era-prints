@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Offers = () => {
   const [startAnimation, setStartAnimation] = useState(false);
@@ -79,30 +80,34 @@ const Offers = () => {
           initial="hidden"
           animate={startAnimation ? "visible" : "hidden"}>
           {offersCard.map((offer, index) => (
-            <motion.div
-              key={offer.id}
-              className="w-48 h-48 sm:w-64 sm:h-64 bg-white dark:shadow-white dark:shadow-sm shadow-lg rounded-lg p-4 text-center cursor-pointer overflow-hidden"
-              custom={index % 2 === 0 ? "left" : "right"}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }} // Add hover scale effect
-            >
-              <img
-                src={offer.image}
-                alt={offer.title}
-                className="w-full sm:h-48 h-32 lg:h-48 object-cover rounded-md"
-              />
-              <p className="mt-3 font-semibold lg:text-sm text-xs">
-                {offer.title}
-              </p>
-            </motion.div>
+            <Link to="/shop">
+              <motion.div
+                key={offer.id}
+                className="w-48 h-48 sm:w-64 sm:h-64 bg-white dark:shadow-white dark:shadow-sm shadow-lg rounded-lg p-4 text-center cursor-pointer overflow-hidden"
+                custom={index % 2 === 0 ? "left" : "right"}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }} // Add hover scale effect
+              >
+                <img
+                  src={offer.image}
+                  alt={offer.title}
+                  className="w-full sm:h-48 h-32 lg:h-48 object-cover rounded-md"
+                />
+                <p className="mt-3 font-semibold lg:text-sm text-xs">
+                  {offer.title}
+                </p>
+              </motion.div>
+            </Link>
           ))}
         </motion.div>
       </div>
-      <h1
-        className="font-semibold text-customBlue text-center pt-10 cursor-pointer"
-        data-aos="fade-up">
-        LETS GET STARTED
-      </h1>
+      <Link to="/shop">
+        <h1
+          className="font-semibold text-customBlue text-center pt-10 cursor-pointer"
+          data-aos="fade-up">
+          LETS GET STARTED
+        </h1>
+      </Link>
     </div>
   );
 };
