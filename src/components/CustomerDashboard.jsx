@@ -3,33 +3,33 @@ import { FaCartPlus } from "react-icons/fa";
 
 const goodsList = [
   // Your goods list as defined earlier
-  { id: 1, name: "Flex Banners", price: 50.0, image: "/path/to/flex-banners.jpg" },
-  { id: 2, name: "Stickers", price: 20.0, image: "/path/to/stickers.jpg" },
-  { id: 3, name: "Branding", price: 100.0, image: "/path/to/branding.jpg" },
+  { id: 1, name: "Flex Banners", price: 50.0, image: "/images/banners.jpeg" },
+  { id: 2, name: "Stickers", price: 20.0, image: "/images/sticker.jpg" },
+  { id: 3, name: "Branding", price: 100.0, image: "/images/branding.jpg" },
 
   // Paper Prints
-  { id: 4, name: "Brochures", price: 30.0, image: "/path/to/brochures.jpg" },
-  { id: 5, name: "Calendars", price: 25.0, image: "/path/to/calendars.jpg" },
-  { id: 6, name: "Posters", price: 40.0, image: "/path/to/posters.jpg" },
-  { id: 7, name: "Flyers", price: 15.0, image: "/path/to/flyers.jpg" },
-  { id: 8, name: "Exercise Books", price: 10.0, image: "/path/to/exercise-books.jpg" },
-  { id: 9, name: "Jotters", price: 5.0, image: "/path/to/jotters.jpg" },
-  { id: 10, name: "Letterheads", price: 35.0, image: "/path/to/letterheads.jpg" },
-  { id: 11, name: "Office Profile", price: 45.0, image: "/path/to/office-profile.jpg" },
-  { id: 12, name: "Invoice", price: 30.0, image: "/path/to/invoice.jpg" },
-  { id: 13, name: "Book Publishing", price: 150.0, image: "/path/to/book-publishing.jpg" },
-  { id: 14, name: "Wedding Programme", price: 50.0, image: "/path/to/wedding-programme.jpg" },
-  { id: 15, name: "Invitation Cards", price: 20.0, image: "/path/to/invitation-cards.jpg" },
-  { id: 16, name: "Complimentary Cards", price: 25.0, image: "/path/to/complimentary-cards.jpg" },
-  { id: 17, name: "Plastic ID Cards", price: 30.0, image: "/path/to/plastic-id-cards.jpg" },
-  { id: 18, name: "Gift Bags", price: 35.0, image: "/path/to/gift-bags.jpg" },
+  { id: 4, name: "Brochures", price: 30.0, image: "/images/brochure.jpeg" },
+  { id: 5, name: "Calendars", price: 25.0, image: "/images/calendar.jpeg" },
+  { id: 6, name: "Posters", price: 40.0, image: "/images/poster.jpg" },
+  { id: 7, name: "Flyers", price: 15.0, image: "/images/flyer.jpeg" },
+  { id: 8, name: "Exercise Books", price: 10.0, image: "/images/exercise.jpeg" },
+  { id: 9, name: "Jotters", price: 5.0, image: "/images/jotter.jpeg" },
+  { id: 10, name: "Letterheads", price: 35.0, image: "/images/Letterhead.jpg" },
+  { id: 11, name: "Office Profile", price: 45.0, image: "/images/office.jpg" },
+  { id: 12, name: "Invoice", price: 30.0, image: "/images/invoice.jpg" },
+  { id: 13, name: "Book Publishing", price: 150.0, image: "/images/publishing.jpg" },
+  { id: 14, name: "Wedding Programme", price: 50.0, image: "/images/programme.jpg" },
+  { id: 15, name: "Invitation Cards", price: 20.0, image: "/images/invitation.jpeg" },
+  { id: 16, name: "Complimentary Cards", price: 25.0, image: "/images/com_cards.jpg" },
+  { id: 17, name: "Plastic ID Cards", price: 30.0, image: "/images/id_card.jpg" },
+  { id: 18, name: "Gift Bags", price: 35.0, image: "/images/gift_bag.jpg" },
 
   // Customization
-  { id: 19, name: "T-Shirts", price: 20.0, image: "/path/to/t-shirts.jpg" },
-  { id: 20, name: "Caps", price: 15.0, image: "/path/to/caps.jpg" },
-  { id: 21, name: "Plates", price: 10.0, image: "/path/to/plates.jpg" },
-  { id: 22, name: "Mugs", price: 12.0, image: "/path/to/mugs.jpg" },
-  { id: 23, name: "School Bags", price: 25.0, image: "/path/to/school-bags.jpg" },
+  { id: 19, name: "T-Shirts", price: 20.0, image: "/images/t_shirt.jpg" },
+  { id: 20, name: "Caps", price: 15.0, image: "/images/cap.jpeg" },
+  { id: 21, name: "Plates", price: 10.0, image: "/images/plate.jpeg" },
+  { id: 22, name: "Mugs", price: 12.0, image: "/images/mug.jpg" },
+  { id: 23, name: "School Bags", price: 25.0, image: "/images/bag.jpeg" },
 ];
 
 const CustomerDashboard = () => {
