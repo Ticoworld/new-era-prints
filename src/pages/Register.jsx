@@ -265,7 +265,7 @@ const Register = () => {
                 <label className="block text-customBlack mb-2">Confirm Password</label>
                 <div className="relative">
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={showConfirmPassword ? "text" : "password"}
                     placeholder="Confirm Password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}

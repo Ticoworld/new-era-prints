@@ -8,12 +8,12 @@ const OrderPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('Usertoken');
         const response = await fetch('https://new-era-server-five.vercel.app/user/getOrders', {
           headers: { 'x-access-token': token },
         });
         const data = await response.json();
-
+        console.log(data);
         if (data.success) {
           setOrders(data.orders);
         } else {
@@ -57,7 +57,7 @@ const OrderPage = () => {
                       order.items.map((product, index) => (
                         <li key={index} className="flex items-center space-x-4">
                           <img
-                            src={product.imageUrl}
+                            src={product.image}
                             alt={product.name}
                             className="w-16 h-16 object-cover rounded"
                           />

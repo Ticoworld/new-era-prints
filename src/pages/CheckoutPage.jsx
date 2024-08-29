@@ -70,7 +70,7 @@ const CheckoutPage = () => {
 
     Swal.fire({
       title: "Place Order",
-      text: `Do you want to place an order with a total amount of $${total.toFixed(
+      text: `Do you want to place an order with a total amount of ₦${total.toFixed(
         2
       )}?`,
       icon: "question",
@@ -153,7 +153,7 @@ const CheckoutPage = () => {
                 </div>
                 <div className="mb-4 text-right">
                   <p className="text-xl font-semibold text-gray-800 dark:text-gray-100">
-                    Total: ${total.toFixed(2)}
+                    Total: ₦{total.toFixed(2)}
                   </p>
                 </div>
                 <button

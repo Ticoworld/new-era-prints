@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import Compressor from "compressorjs";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CompleteRegistrationPage = () => {
   const [profilePic, setProfilePic] = useState(null);
@@ -11,54 +12,38 @@ const CompleteRegistrationPage = () => {
   const [whatsapp, setWhatsapp] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        Swal.fire({
-          icon: "warning",
-          title: "Unauthorized",
-          text: "Please log in to access this page.",
-          timer: 2000,
-          showConfirmButton: false,
-        });
-        navigate("/contest-login");
-        return;
-      }
-      try {
-        const response = await fetch("https://new-era-server-five.vercel.app/contestant/getdata", {
-          method: "GET",
-          headers: {
-            "x-access-token": token,
-          }
-        });
-        const result = await response.json();
-        if (result.success) {
-          if (result.isRegistrationCompleted) {
-            navigate("/contestantpage");
-          } else {
-
-          }
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: result.message || "Failed to fetch user data.",
-          });
-          navigate("/contest-login");
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
+  const handleImageUpload = (file, setFileState) => {
+    new Compressor(file, {
+      quality: 0.6, // Adjust the quality to reduce the file size
+      maxWidth: 800, // Resize width if needed
+      maxHeight: 600, // Resize height if needed
+      success(result) {
+        setFileState(result);
+      },
+      error(err) {
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: "An unexpected error occurred.",
+          text: "Image compression failed.",
         });
-      }
-    };
+      },
+    });
+  };
 
-    fetchUserData();
-  }, [navigate]);
+  const handleProfilePicChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      handleImageUpload(file, setProfilePic);
+    }
+  };
+
+  const handleCoverPicChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      handleImageUpload(file, setCoverPic);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -78,28 +63,22 @@ const CompleteRegistrationPage = () => {
           "x-access-token": token,
         },
       });
-
       const result = await response.json();
-      console.log(result); // Log the result to check
-
       if (result.success) {
         Swal.fire({
           icon: "success",
           title: "Registration Completed",
           text: "Your registration is now complete!",
-          timer: 2000,
-          showConfirmButton: false,
         });
-        navigate("/contestantpage"); // Ensure this route is correct
+        navigate("/contestantpage");
       } else {
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: "There was an error completing your registration.",
+          text: result.message || "There was an error completing your registration.",
         });
       }
     } catch (error) {
-      console.error("Error:", error);
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -113,14 +92,13 @@ const CompleteRegistrationPage = () => {
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Complete Your Registration</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Form fields */}
           {/* Profile Picture */}
           <div>
             <label className="block text-gray-800 mb-2">Profile Picture</label>
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => setProfilePic(e.target.files[0])}
+              onChange={handleProfilePicChange}
               className="w-full"
             />
           </div>
@@ -131,7 +109,7 @@ const CompleteRegistrationPage = () => {
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => setCoverPic(e.target.files[0])}
+              onChange={handleCoverPicChange}
               className="w-full"
             />
           </div>
@@ -184,7 +162,8 @@ const CompleteRegistrationPage = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition">
+            className="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition"
+          >
             Submit
           </button>
         </form>

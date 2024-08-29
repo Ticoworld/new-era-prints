@@ -24,7 +24,6 @@ const goodsList = [
   { id: 17, name: "Plastic ID Cards", price: 30.0, image: "/images/id_card.jpg" },
   { id: 18, name: "Gift Bags", price: 35.0, image: "/images/gift_bag.jpg" },
 
-  // Customization
   { id: 19, name: "T-Shirts", price: 20.0, image: "/images/t_shirt.jpg" },
   { id: 20, name: "Caps", price: 15.0, image: "/images/cap.jpeg" },
   { id: 21, name: "Plates", price: 10.0, image: "/images/plate.jpeg" },
@@ -104,7 +103,7 @@ const CustomerDashboard = () => {
                 />
                 <div className="mt-4">
                   <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
-                  <p className="text-gray-600">${item.price.toFixed(2)}</p>
+                  <p className="text-gray-600">₦{item.price.toFixed(2)}</p>
                   <button
                     onClick={() => addToCart(item)}
                     className="mt-2 bg-blue-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-blue-700 transition"

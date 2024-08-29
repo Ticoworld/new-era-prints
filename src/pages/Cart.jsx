@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaTrashAlt, FaPlus, FaMinus } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import 'tailwindcss/tailwind.css';
 import Loader from "../components/Loader";
@@ -44,13 +44,6 @@ const Cart = () => {
     const data = await response.json();
     if (data.success) {
       setCartItems(updatedCartItems);
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: data.message,
-        timer: 2000,
-        showConfirmButton: false,
-      });
     }
   };
 
@@ -70,6 +63,13 @@ const Cart = () => {
         updateCart(newCartItems);
       }
     });
+  };
+
+  const handleQuantityChange = (index, value) => {
+    const newQuantity = Math.max(1, Number(value));
+    const newCartItems = [...cartItems];
+    newCartItems[index].quantity = newQuantity;
+    updateCart(newCartItems);
   };
 
   const incrementQuantity = (index) => {
@@ -117,14 +117,20 @@ const Cart = () => {
                                 onClick={() => decrementQuantity(index)}
                                 className="bg-gray-300 text-gray-800 py-1 px-3 rounded-lg shadow-lg hover:bg-gray-400 transition"
                               >
-                                <FaMinus />
+                                -
                               </button>
-                              <span className="mx-4 text-gray-800">{item.quantity}</span>
+                              <input
+                                type="number"
+                                min="1"
+                                value={item.quantity}
+                                onChange={(e) => handleQuantityChange(index, e.target.value)}
+                                className="mx-4 w-16 text-center border rounded-lg"
+                              />
                               <button
                                 onClick={() => incrementQuantity(index)}
                                 className="bg-gray-300 text-gray-800 py-1 px-3 rounded-lg shadow-lg hover:bg-gray-400 transition"
                               >
-                                <FaPlus />
+                                +
                               </button>
                             </div>
                           </div>
@@ -140,7 +146,7 @@ const Cart = () => {
                   </ul>
                   <div className="mt-4 text-right">
                     <p className="text-lg font-semibold text-gray-800">
-                      Total: ${totalPrice.toFixed(2)}
+                      Total: ₦{totalPrice.toFixed(2)}
                     </p>
                     <button
                       className="mt-2 bg-green-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-green-700 transition"
@@ -153,9 +159,9 @@ const Cart = () => {
               ) : (
                 <p className="text-gray-600">Your cart is empty.</p>
               )}
-            </></div>
+            </>
+          </div>
           )}
-        
       </div>
     </div>
   );
