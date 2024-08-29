@@ -6,8 +6,8 @@ import RegisteredUsers from "./RegisteredUsers";
 import RegisteredContestants from "./RegisteredContestants";
 import PendingOrders from "./PendingOrders";
 import CompletedOrders from "./CompletedOrders";
-import ContestLeaderBoard from "./contestLeaderBoard";
 import { AdminContext } from "../Context/AdminContext"; // Import AdminContext
+import LeaderBoard from "./LeaderBoard";
 
 const AdminPage = () => {
   // Use the context to get data
@@ -52,7 +52,7 @@ const AdminPage = () => {
         />
         <Route
           path="leaderboard"
-          element={<ContestLeaderBoard contestants={contestants} />}
+          element={<LeaderBoard contestants={contestants} />}
         />
       </Routes>
       <Outlet />
