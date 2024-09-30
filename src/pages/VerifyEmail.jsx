@@ -22,15 +22,18 @@ const VerifyEmail = () => {
 
   const verifyOtp = async (otpToVerify, isUrlOtp = false) => {
     setLoading(true);
-    const role = localStorage.getItem('role');
+    const role = localStorage.getItem("role");
     try {
-      const response = await fetch("https://new-era-server-five.vercel.app/verify/verify-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ otp: otpToVerify, email }),
-      });
+      const response = await fetch(
+        "https://new-era-server-five.vercel.app/verify/verify-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ otp: otpToVerify, email }),
+        }
+      );
 
       const res = await response.json();
 
@@ -40,9 +43,9 @@ const VerifyEmail = () => {
           title: "Email verified successfully. Redirecting to login page...",
         });
         if (role === "customer") {
-                  navigate('/login'); // Redirect directly to login page
+          navigate("/login"); // Redirect directly to login page
         } else {
-          navigate('/contest-login'); // Redirect directly to admin login page
+          navigate("/contest-login"); // Redirect directly to admin login page
         }
       } else {
         Toast.fire({
@@ -91,13 +94,16 @@ const VerifyEmail = () => {
         return;
       }
 
-      const response = await fetch("https://new-era-server-five.vercel.app/verify/resend-otp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+      const response = await fetch(
+        "https://new-era-server-five.vercel.app/verify/resend-otp",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
 
       const res = await response.json();
 
@@ -126,7 +132,9 @@ const VerifyEmail = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-customGray dark:bg-customBlack md:py-20 py-10 md:px-12 px-6">
       <div className="bg-white dark:bg-customGray2 shadow-lg rounded-lg p-8 w-full max-w-lg">
-        <h2 className="text-3xl font-bold mb-6 text-customBlack">Verify Email</h2>
+        <h2 className="text-3xl font-bold mb-6 text-customBlack">
+          Verify Email
+        </h2>
         {loading || resendingOtp ? (
           <p className="text-center text-customBlack">Processing...</p>
         ) : (
@@ -137,7 +145,7 @@ const VerifyEmail = () => {
                 <input
                   type="text"
                   value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
+                  onChange={(e) => setOtp(e.target.value.trim())} // Trim white spaces
                   placeholder="OTP"
                   className="w-full input-style bg-customBlue text-white py-3 px-4 rounded-md"
                   required
@@ -146,16 +154,14 @@ const VerifyEmail = () => {
               <button
                 type="submit"
                 className="w-full bg-customBlue text-white py-3 rounded-md font-semibold"
-                disabled={loading}
-              >
+                disabled={loading}>
                 Verify Email
               </button>
             </form>
             <button
               onClick={handleResendOtp}
               className="w-full bg-customGray text-white py-3 rounded-md font-semibold mt-4"
-              disabled={resendingOtp}
-            >
+              disabled={resendingOtp}>
               {resendingOtp ? "Resending OTP..." : "Resend OTP"}
             </button>
           </>
