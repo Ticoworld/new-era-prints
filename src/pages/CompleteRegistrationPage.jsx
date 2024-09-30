@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Compressor from "compressorjs";
+import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
@@ -12,35 +11,17 @@ const CompleteRegistrationPage = () => {
   const [whatsapp, setWhatsapp] = useState("");
   const navigate = useNavigate();
 
-  const handleImageUpload = (file, setFileState) => {
-    new Compressor(file, {
-      quality: 0.6, // Adjust the quality to reduce the file size
-      maxWidth: 800, // Resize width if needed
-      maxHeight: 600, // Resize height if needed
-      success(result) {
-        setFileState(result);
-      },
-      error(err) {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Image compression failed.",
-        });
-      },
-    });
-  };
-
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      handleImageUpload(file, setProfilePic);
+      setProfilePic(file);
     }
   };
 
   const handleCoverPicChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      handleImageUpload(file, setCoverPic);
+      setCoverPic(file);
     }
   };
 
