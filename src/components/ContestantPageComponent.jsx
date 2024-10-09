@@ -10,7 +10,7 @@ const ContestantPageComponent = ({ user }) => {
   const [copied, setCopied] = useState(false);
 
   // Generate the invite link based on the username
-  const inviteLink = `https://new-era-server-five.vercel.app/invite/${user.username}`;
+  const inviteLink = `https://neweraprints.vercel.app/invite/${user.username}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(inviteLink);
