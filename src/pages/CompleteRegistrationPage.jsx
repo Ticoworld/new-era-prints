@@ -171,7 +171,7 @@ const CompleteRegistrationPage = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {coverPicUploading ? <p className="text-blue-600 mt-2">Uploading...</p> : coverPicCloudinaryImage && (
-              <AdvancedImage cldImg={coverPicCloudinaryImage} className="w-full h-32 mt-4 rounded-lg border-2 border-gray-300 object-cover" />
+              <AdvancedImage cldImg={coverPicCloudinaryImage} className="w-32 h-32 mt-4 rounded-full border-2 border-gray-300 object-cover" />
             )}
           </div>
 
