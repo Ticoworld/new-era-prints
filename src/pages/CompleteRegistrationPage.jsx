@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 const upload_preset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
-
+console.log(cloudName)
 const cld = new Cloudinary({
   cloud: {
     cloudName: cloudName,
