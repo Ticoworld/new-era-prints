@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Header from "../components/Header";
 import EachContestant from "../components/EachContestant";
 import Swal from "sweetalert2";
+import Loader from "../components/Loader";
 
 const Contestant = () => {
   const { username } = useParams();
@@ -39,7 +40,9 @@ const Contestant = () => {
   }, [username]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>
+      <Loader />
+    </div>;
   }
 
   return (

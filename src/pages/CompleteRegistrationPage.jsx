@@ -72,15 +72,11 @@ const CompleteRegistrationPage = () => {
     });
   };
 
-  // Ensure all fields are filled and images are uploaded before submitting
+  // Ensure images are uploaded before submitting
   const isFormValid = () => {
     return (
-      profilePicUrl && 
-      coverPicUrl && 
-      twitter.trim() && 
-      instagram.trim() && 
-      facebook.trim() && 
-      whatsapp.trim() && 
+      profilePicCloudinaryUrl && 
+      coverPicCloudinaryUrl && 
       !profilePicUploading && 
       !coverPicUploading
     );
@@ -93,7 +89,7 @@ const CompleteRegistrationPage = () => {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Please fill all fields and ensure both images are uploaded.",
+        text: "Please ensure both images are uploaded.",
       });
       return;
     }
@@ -175,10 +171,10 @@ const CompleteRegistrationPage = () => {
             )}
           </div>
 
-          {/* Social Media Links */}
+          {/* Social Media Links (Optional) */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Twitter</label>
+              <label className="block text-gray-700 font-medium mb-2">Twitter (Optional)</label>
               <input
                 type="text"
                 value={twitter}
@@ -189,7 +185,7 @@ const CompleteRegistrationPage = () => {
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Instagram</label>
+              <label className="block text-gray-700 font-medium mb-2">Instagram (Optional)</label>
               <input
                 type="text"
                 value={instagram}
@@ -200,7 +196,7 @@ const CompleteRegistrationPage = () => {
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-2">Facebook</label>
+              <label className="block text-gray-700 font-medium mb-2">Facebook (Optional)</label>
               <input
                 type="text"
                 value={facebook}
@@ -211,7 +207,7 @@ const CompleteRegistrationPage = () => {
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-2">WhatsApp</label>
+              <label className="block text-gray-700 font-medium mb-2">WhatsApp (Optional)</label>
               <input
                 type="text"
                 value={whatsapp}
@@ -225,12 +221,10 @@ const CompleteRegistrationPage = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className={`w-full py-3 rounded-lg font-semibold transition duration-300 ${
-              isFormValid() ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-gray-300 text-gray-500 cursor-not-allowed"
-            }`}
+            className={`w-full py-3 rounded-lg font-semibold transition duration-300 ${isFormValid() ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
             disabled={!isFormValid()}
           >
-            Submit
+            Complete Registration
           </button>
         </form>
       </div>

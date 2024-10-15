@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "./Button";
 import { motion } from "framer-motion";
 import VoteCalculator from "./VoteCalculator";
+import { BsX } from "react-icons/bs";
 
 const EachContestant = ({ contestant }) => {
   const [showVoteCalculator, setShowVoteCalculator] = useState(false);
@@ -31,9 +32,7 @@ const EachContestant = ({ contestant }) => {
               alt=""
               className="w-full h-full object-cover md:px-1 px-8 lg:px-0"
             />
-            <p className="absolute bottom-16 left-1/2 transform -translate-x-1/2 text-center text-customBlack font-semibold text-xl">
-              {contestant ? contestant.username : ''}
-            </p>
+            
           </motion.div>
 
           <motion.div
@@ -80,7 +79,12 @@ const EachContestant = ({ contestant }) => {
       </div>
 
       {showVoteCalculator && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center mt-10 z-50 h-full">
+          <BsX 
+          className="text-red-600 md:text-5xl text-4xl absolute top-12 left-0 cursor-pointer" 
+          title="cancel"
+          onClick={handleCloseModal}
+          />
           <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full">
             <VoteCalculator 
               contestant={contestant} 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Loader from "../components/Loader";
-import { handlePayment } from "../utils/paystack";
 
 const CheckoutPage = () => {
   const [billingAddress, setBillingAddress] = useState({
@@ -80,8 +79,38 @@ const CheckoutPage = () => {
       confirmButtonText: "Yes, place order!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // Pass the products, billingAddress, and total to the handlePayment function
-        handlePayment(billingAddress, products, total);
+        // Construct the message for WhatsApp
+        const orderMessage = `
+        Hello, I would like to place an order. Here are my details and the items I want to purchase:
+      
+        *My Details:*
+        - Name: ${billingAddress.name}
+        - Email: ${billingAddress.email}
+        - Phone: ${billingAddress.phone}
+        - Address: ${billingAddress.address}, ${billingAddress.city}, ${billingAddress.state}, ${billingAddress.zip}
+      
+        *Products I Want to Buy:*
+        ${products.map((product) => {
+          return `
+            - ${product.quantity} x ${product.name} - ₦${product.price} each
+            ${product.image ? `Image: ${product.image}` : ''}
+          `;
+        }).join("\n")}
+      
+        *Total Amount: ₦${total.toFixed(2)}*
+      
+        Please confirm the order and let me know if you need any further details. Thank you!
+      `;
+      
+
+        // Encode the message to be URL-safe
+        const encodedMessage = encodeURIComponent(orderMessage);
+
+        // Replace `ADMIN_PHONE_NUMBER` with the admin's WhatsApp number (in international format)
+        const whatsappLink = `https://wa.me/+2347026601550?text=${encodedMessage}`;
+
+        // Open the WhatsApp link
+        window.open(whatsappLink, "_blank");
       }
     });
   };
@@ -99,20 +128,9 @@ const CheckoutPage = () => {
                   Billing Address
                 </h2>
                 <form>
-                  {[
-                    { label: "Name", name: "name", type: "text" },
-                    { label: "Email", name: "email", type: "email" },
-                    { label: "Phone", name: "phone", type: "tel" },
-                    { label: "Address", name: "address", type: "text" },
-                    { label: "City", name: "city", type: "text" },
-                    { label: "State", name: "state", type: "text" },
-                    { label: "Zip Code", name: "zip", type: "text" },
-                  ].map(({ label, name, type }) => (
+                  {[{ label: "Name", name: "name", type: "text" }, { label: "Email", name: "email", type: "email" }, { label: "Phone", name: "phone", type: "tel" }, { label: "Address", name: "address", type: "text" }, { label: "City", name: "city", type: "text" }, { label: "State", name: "state", type: "text" }, { label: "Zip Code", name: "zip", type: "text" }].map(({ label, name, type }) => (
                     <div key={name} className="mb-4">
-                      <label
-                        className="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300"
-                        htmlFor={name}
-                      >
+                      <label className="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300" htmlFor={name}>
                         {label}
                       </label>
                       <input
@@ -130,31 +148,24 @@ const CheckoutPage = () => {
               </div>
 
               <div className="order-summary bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-                <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">
-                  Order Summary
-                </h2>
+                <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">Order Summary</h2>
                 <div className="mb-4">
-                  <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-100">
-                    Products
-                  </h3>
+                  <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-100">Products</h3>
                   <ul className="list-disc pl-5">
                     {products.map((product, index) => (
-                      <li
-                        key={index}
-                        className="mb-2 flex justify-between text-gray-800 dark:text-gray-100"
-                      >
-                        <span>{product.name}</span>
-                        <span>
-                          ${(product.price * product.quantity).toFixed(2)}
-                        </span>
+                      <li key={index} className="mb-2 flex justify-between text-gray-800 dark:text-gray-100"> 
+                        <div>
+                          <span>{product.name}</span>
+                        <div><img src={product.image} alt="" className="w-16 h-16"/></div>
+                        </div>
+                        
+                        <span>₦{(product.price * product.quantity).toFixed(2)}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div className="mb-4 text-right">
-                  <p className="text-xl font-semibold text-gray-800 dark:text-gray-100">
-                    Total: ₦{total.toFixed(2)}
-                  </p>
+                  <p className="text-xl font-semibold text-gray-800 dark:text-gray-100">Total: ₦{total.toFixed(2)}</p>
                 </div>
                 <button
                   onClick={handlePlaceOrder}

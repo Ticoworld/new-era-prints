@@ -3,14 +3,14 @@ import Swal from 'sweetalert2';
 import { handlePayment } from '../utils/votePayment';
 
 const VoteCalculator = ({ contestant, onClose }) => {
-  const [votes, setVotes] = useState(0);
+  const [votes, setVotes] = useState('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-  const pricePerVote = 50; // Each vote costs $50
+  const pricePerVote = 50; 
 
   const handleVoteChange = (e) => {
     const value = e.target.value;
-    setVotes(Number(value));
+    setVotes(value);
   };
 
   const handleEmailChange = (e) => {
@@ -23,11 +23,12 @@ const VoteCalculator = ({ contestant, onClose }) => {
 
   const handleVoteSubmit = () => {
     if (votes > 0 && email && name) {
-      const totalAmount = votes * pricePerVote;
+      const totalAmount = Number(votes) * pricePerVote;
+      console.log(typeof(totalAmount));
 
       Swal.fire({
         title: 'Confirm Payment',
-        text: `Do you want to pay the sum of $${totalAmount.toFixed(2)} to vote for ${contestant.username}?`,
+        text: `Do you want to pay the sum of ₦${totalAmount.toFixed(2)} to vote for ${contestant.username}?`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes, pay now!',
@@ -63,13 +64,13 @@ const VoteCalculator = ({ contestant, onClose }) => {
   return (
     <div className="vote-for-contestant">
       <h3 className="text-lg font-semibold mb-4">Vote for {contestant.username}</h3>
-      <p className="text-gray-600 mb-2">Each vote costs $50</p>
+      <p className="text-gray-600 mb-2">Each vote costs ₦50</p>
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="votes">
           Number of Votes:
         </label>
         <input
-          type="number"
+          type="text"
           id="votes"
           value={votes}
           onChange={handleVoteChange}
