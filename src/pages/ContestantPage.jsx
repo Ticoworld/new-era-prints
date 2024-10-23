@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import ContestantPageComponent from "../components/ContestantPageComponent";
 import Loader from "../components/Loader";
 
-const ContestantPage = () => {
+const ContestantPage = ({serverUrl}) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const ContestantPage = () => {
       }
 
       try {
-        const response = await fetch("https://new-era-server-five.vercel.app/contestant/getdata", {
+        const response = await fetch(`${serverUrl}/contestant/getdata`, {
           method: "GET",
           headers: {
             "x-access-token": token,
@@ -97,7 +97,7 @@ const ContestantPage = () => {
 
   return (
     <div>
-      <ContestantPageComponent user={user} />
+      <ContestantPageComponent user={user} serverUrl={serverUrl}/>
     </div>
   );
 };

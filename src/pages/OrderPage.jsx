@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Loader from '../components/Loader';
 
-const OrderPage = () => {
+const OrderPage = ({serverUrl}) => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -9,13 +9,17 @@ const OrderPage = () => {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem('Usertoken');
-        const response = await fetch('https://new-era-server-five.vercel.app/user/getOrders', {
+        const response = await fetch(`${serverUrl}/user/getOrders`, {
           headers: { 'x-access-token': token },
         });
         const data = await response.json();
         console.log(data);
         if (data.success) {
-          setOrders(data.orders);
+          // Filter for orders with status "Awaiting" or "Pending"
+          const filteredOrders = data.orders.filter(order => 
+            order.status === 'Awaiting' || order.status === 'Pending'
+          );
+          setOrders(filteredOrders);
         } else {
           console.error('Failed to fetch orders:', data.message);
         }
@@ -49,7 +53,7 @@ const OrderPage = () => {
                     Date: {new Date(order.createdAt).toLocaleString()}
                   </p>
                   <p className="text-gray-800 dark:text-gray-100">
-                    Total: ${order.totalAmount ? order.totalAmount.toFixed(2) : '0.00'}
+                    Total:  ₦{order.totalAmount ? order.totalAmount.toFixed(2) : '0.00'}
                   </p>
                   <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mt-2">Items:</h4>
                   <ul className="list-disc pl-5 text-gray-800 dark:text-gray-100">
@@ -64,7 +68,7 @@ const OrderPage = () => {
                           <div>
                             <p>{product.name}</p>
                             <p>
-                              ${product.price ? product.price.toFixed(2) : '0.00'} x {product.quantity ?? 0}
+                            ₦{product.price ? product.price.toFixed(2) : '0.00'} x {product.quantity ?? 0}
                             </p>
                           </div>
                         </li>

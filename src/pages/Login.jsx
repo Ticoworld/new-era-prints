@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Toast from "../utils/utils";
 
-const Login = () => {
+const Login = ({serverUrl}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +33,7 @@ const Login = () => {
     setLoading(true); // Start loading
 
     try {
-      const response = await fetch("https://new-era-server-five.vercel.app/user-auth/login", {
+      const response = await fetch(`${serverUrl}/user-auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +74,7 @@ const Login = () => {
           {/* Left Section - Image */}
           <div className="hidden lg:block w-1/3 bg-customBlack flex-1">
             <img
-              src="/images/login.jpeg"
+              src="/images/contestant.png"
               alt="Login Visual"
               className="w-full h-full object-cover"
             />

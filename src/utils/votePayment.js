@@ -1,5 +1,6 @@
 import Swal from 'sweetalert2';
 import PaystackPop from '@paystack/inline-js';
+const serverUrl = import.meta.env.VITE_API_BASE_URL;
 
 export const handlePayment = async (email, amount, name, contestantUsername, votes) => {
   try {
@@ -13,7 +14,7 @@ export const handlePayment = async (email, amount, name, contestantUsername, vot
     });
 
     // Initialize payment
-    const response = await fetch('https://new-era-server-five.vercel.app/payment/vote-payment', {
+    const response = await fetch(`${serverUrl}/payment/vote-payment`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

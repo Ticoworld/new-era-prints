@@ -28,7 +28,7 @@ const getToken = () => {
   return localStorage.getItem('Usertoken');
 };
 
-const Shop = () => {
+const Shop = ({serverUrl}) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const Shop = () => {
 
     const fetchUser = async () => {
       try {
-        const response = await fetch(`https://new-era-server-five.vercel.app/user/getdata`, {
+        const response = await fetch(`${serverUrl}/user/getdata`, {
           headers: {
             'x-access-token': token,
           }
@@ -139,11 +139,11 @@ const Shop = () => {
         <div>
           <CustomerHeader logout={logout} />
           <Routes>
-            <Route path="/" element={<CustomerDashboard />} />
-            <Route path="history" element={<HistoryPage />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="checkout" element={<CheckoutPage />} />
-            <Route path="order" element={<OrderPage />} />
+            <Route path="/" element={<CustomerDashboard serverUrl={serverUrl}/>} />
+            <Route path="history" element={<HistoryPage serverUrl={serverUrl}/>} />
+            <Route path="cart" element={<Cart serverUrl={serverUrl}/>} />
+            <Route path="checkout" element={<CheckoutPage serverUrl={serverUrl}/>} />
+            <Route path="order" element={<OrderPage serverUrl={serverUrl}/>} />
           </Routes>
           <Outlet />
         </div>

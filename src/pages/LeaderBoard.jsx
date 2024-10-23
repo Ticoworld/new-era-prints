@@ -35,7 +35,7 @@ const Leaderboard = ({ contestants }) => {
                 <img
                   src={
                     typeof contestant.profilePic === "string"
-                      ? `http://localhost:3000/${contestant.profilePic}`
+                      ? `${contestant.profilePic}`
                       : "default-image-url"
                   }
                   alt={

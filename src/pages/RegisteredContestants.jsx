@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
-const RegisteredContestants = ({ contestants }) => {
+const RegisteredContestants = ({ contestants, serverUrl }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
 const handleDelete = async (contestantId) => {
@@ -18,7 +18,7 @@ const handleDelete = async (contestantId) => {
 
     if (result.isConfirmed) {
       // Perform delete operation
-      const response = await fetch(`http://localhost:3000/admin/contestants/${contestantId}`, { method: 'DELETE' });
+      const response = await fetch(`${serverUrl}/admin/contestants/${contestantId}`, { method: 'DELETE' });
 
       if (response.ok) {
         Swal.fire('Deleted!', 'The user has been deleted.', 'success');

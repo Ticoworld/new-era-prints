@@ -1,11 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import { motion } from "framer-motion";
 import VoteCalculator from "./VoteCalculator";
 import { BsX } from "react-icons/bs";
 
-const EachContestant = ({ contestant }) => {
+const EachContestant = ({ contestant, serverUrl }) => {
   const [showVoteCalculator, setShowVoteCalculator] = useState(false);
+  const [votePrice, setVotePrice] = useState('');
+  useEffect(()=>{
+    const fetchVotePrice = async () => {
+      try {
+        const response = await fetch(`${serverUrl}/setting/getVotePrice`);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('Vote Price:', data.price);
+        setVotePrice(data.price)
+      } catch (error) {
+        console.error('Failed to fetch vote price:', error.message);
+      }
+    };
+    
+    fetchVotePrice();    
+  },[]) 
 
   const handleVoteClick = () => {
     setShowVoteCalculator(true);
@@ -89,6 +107,8 @@ const EachContestant = ({ contestant }) => {
             <VoteCalculator 
               contestant={contestant} 
               onClose={handleCloseModal} 
+              votePrice = {votePrice}
+              setVotePrice = {setVotePrice}
             />
             <div className="text-right mt-4">
               <button

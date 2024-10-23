@@ -1,20 +1,22 @@
-// ForgotPassword.js
+// ContestantResetPassword.js
 import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const ForgotPassword = ({serverUrl}) => {
-  const [email, setEmail] = useState('');
+const ContestantResetPassword = ({serverUrl}) => {
+  const { token } = useParams(); // Get the token from the URL parameters
+  const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-
+    const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${serverUrl}/user-auth/forgot-password`, {
+      const response = await fetch(`${serverUrl}/contestant-auth/reset-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ resetToken: token, newPassword }),
       });
 
       const result = await response.json();
@@ -22,27 +24,28 @@ const ForgotPassword = ({serverUrl}) => {
       if (response.ok) {
         setMessage(result.message);
         setError('');
+        navigate('/contest-login')
       } else {
         setError(result.message);
         setMessage('');
       }
     } catch (err) {
-      setError('Error sending password reset link.');
+      setError('Error resetting password.');
       setMessage('');
     }
   };
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Forgot Password</h2>
+      <h2 className="text-2xl font-bold mb-4">Reset Password</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="email" className="block text-lg">Email Address</label>
+          <label htmlFor="newPassword" className="block text-lg">New Password</label>
           <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="password"
+            id="newPassword"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
             required
             className="w-full p-2 border rounded"
           />
@@ -51,7 +54,7 @@ const ForgotPassword = ({serverUrl}) => {
           type="submit"
           className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
         >
-          Send Reset Link
+          Reset Password
         </button>
         {message && <p className="text-green-500">{message}</p>}
         {error && <p className="text-red-500">{error}</p>}
@@ -60,4 +63,4 @@ const ForgotPassword = ({serverUrl}) => {
   );
 };
 
-export default ForgotPassword;
+export default ContestantResetPassword;

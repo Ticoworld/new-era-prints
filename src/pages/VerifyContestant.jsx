@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Toast from "../utils/utils";
 
-const VerifyContestant = () => {
+const VerifyContestant = ({serverUrl}) => {
   const [otp, setOtp] = useState(""); // Manually entered OTP
   const [loading, setLoading] = useState(false); // Loading state for verification process
   const [resendingOtp, setResendingOtp] = useState(false); // Loading state for OTP resend
@@ -24,7 +24,7 @@ const VerifyContestant = () => {
     setLoading(true);
     const role = localStorage.getItem('role');
     try {
-      const response = await fetch("https://new-era-server-five.vercel.app/contest-verify/verify-email", {
+      const response = await fetch(`${serverUrl}/contest-verify/verify-email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +91,7 @@ const VerifyContestant = () => {
         return;
       }
 
-      const response = await fetch("https://new-era-server-five.vercel.app/contest-verify/resend-otp", {
+      const response = await fetch(`${serverUrl}/contest-verify/resend-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

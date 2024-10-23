@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const AdminAuth = () => {
+const AdminAuth = ({serverUrl}) => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +22,7 @@ const AdminAuth = () => {
 
     try {
       const response = await fetch(
-        isLogin ? 'http://localhost:3000/admin/login' : 'http://localhost:3000/admin/register',
+        isLogin ? `${serverUrl}/admin/login` : `${serverUrl}/admin/register`,
         {
           method: 'POST',
           headers: {
@@ -38,8 +38,8 @@ const AdminAuth = () => {
         setMessage(isLogin ? 'Login successful!' : 'Registration successful!');
         setIsSuccess(true);
         if (isLogin) {
-          localStorage.setItem('token', data.token);
-          console.log(data.token);
+          localStorage.setItem('AdminToken', data.token);
+          localStorage.setItem('expiresAt',data.expirationTime * 1000); 
           navigate('/admin'); // Redirect to the admin page
         }
       } else {

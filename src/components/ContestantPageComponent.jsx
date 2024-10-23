@@ -6,11 +6,11 @@ import Swal from "sweetalert2";
 import ContestantHeader from "./ContestantHeader";
 import Button from "./Button"; // Ensure Button component is imported
 
-const ContestantPageComponent = ({ user }) => {
+const ContestantPageComponent = ({ user, serverUrl }) => {
   const [copied, setCopied] = useState(false);
 
   // Generate the invite link based on the username
-  const inviteLink = `https://neweraprints.vercel.app/invite/${user.username}`;
+  const inviteLink = `${serverUrl}/invite/${user.username}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(inviteLink);

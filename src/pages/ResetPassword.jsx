@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const ResetPassword = () => {
+const ResetPassword = ({serverUrl}) => {
   const { token } = useParams(); // Get the token from the URL parameters
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -11,7 +11,7 @@ const ResetPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://new-era-server-five.vercel.app/user-auth/reset-password', {
+      const response = await fetch(`${serverUrl}/user-auth/reset-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

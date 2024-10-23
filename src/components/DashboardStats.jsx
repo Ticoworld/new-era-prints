@@ -3,6 +3,7 @@ import { FaUsers, FaClipboardList, FaShoppingCart, FaCheckCircle } from 'react-i
 import DashboardStatsGraph from './DashboardStatsGraph'; // Import the graph component
 
 const DashboardStats = ({ usersCount, contestantsCount, pendingOrdersCount, completedOrdersCount }) => {
+
   return (
     <div>
       {/* Stats Grid */}

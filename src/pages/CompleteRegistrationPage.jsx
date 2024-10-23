@@ -12,7 +12,7 @@ const cld = new Cloudinary({
   }
 });
 
-const CompleteRegistrationPage = () => {
+const CompleteRegistrationPage = ({serverUrl}) => {
   const [profilePicUrl, setProfilePicUrl] = useState("");
   const [coverPicUrl, setCoverPicUrl] = useState("");
   const [twitter, setTwitter] = useState("");
@@ -96,7 +96,7 @@ const CompleteRegistrationPage = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://new-era-server-five.vercel.app/contestant-auth/complete-registration", {
+      const response = await fetch(`${serverUrl}/contestant-auth/complete-registration`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

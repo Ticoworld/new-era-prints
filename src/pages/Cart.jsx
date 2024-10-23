@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import 'tailwindcss/tailwind.css';
 import Loader from "../components/Loader";
 
-const Cart = () => {
+const Cart = ({serverUrl}) => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
 
@@ -14,7 +14,7 @@ const Cart = () => {
       try {
         setLoading(true); // Set loading to true when starting fetch
         const token = localStorage.getItem('Usertoken');
-        const response = await fetch(`https://new-era-server-five.vercel.app/user/getdata`, {
+        const response = await fetch(`${serverUrl}/user/getdata`, {
           headers: { 'x-access-token': token },
         });
         const data = await response.json();
@@ -33,7 +33,7 @@ const Cart = () => {
 
   const updateCart = async (updatedCartItems) => {
     const token = localStorage.getItem('Usertoken');
-    const response = await fetch(`https://new-era-server-five.vercel.app/user/updateCart`, {
+    const response = await fetch(`${serverUrl}/user/updateCart`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

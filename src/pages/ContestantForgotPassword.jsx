@@ -1,7 +1,7 @@
-// ForgotPassword.js
+// ContestantForgotPassword.js
 import React, { useState } from 'react';
 
-const ForgotPassword = ({serverUrl}) => {
+const ContestantForgotPassword = ({serverUrl}) => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -9,7 +9,7 @@ const ForgotPassword = ({serverUrl}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${serverUrl}/user-auth/forgot-password`, {
+      const response = await fetch(`${serverUrl}/contestant-auth/forgot-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,4 +60,4 @@ const ForgotPassword = ({serverUrl}) => {
   );
 };
 
-export default ForgotPassword;
+export default ContestantForgotPassword;

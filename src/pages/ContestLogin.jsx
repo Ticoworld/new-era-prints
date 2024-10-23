@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Toast from "../utils/utils";
 
-const ContestLogin = () => {
+const ContestLogin = ({serverUrl}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +33,7 @@ const ContestLogin = () => {
     setLoading(true); // Start loading
   
     try {
-      const response = await fetch("https://new-era-server-five.vercel.app/contestant-auth/login", {
+      const response = await fetch(`${serverUrl}/contestant-auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const ContestLogin = () => {
           {/* Left Section - Image */}
           <div className="hidden lg:block w-1/3 bg-customBlack flex-1">
             <img
-              src="/images/contest-login.jpeg"
+              src="/images/contestant.png"
               alt="Login Visual"
               className="w-full h-full object-cover"
             />
@@ -125,6 +125,9 @@ const ContestLogin = () => {
                 {loading ? "Logging in..." : "Login"}
               </button>
             </form>
+            <Link to="/forgot-password" className="text-customBlue pt-2">
+              Forgotten Password?
+            </Link>
                    <div className="pt-4"><p>Don't have an account? <Link to="/contest-register" className="text-customBlue">Sign up</Link></p></div> 
           </div>
         </div>

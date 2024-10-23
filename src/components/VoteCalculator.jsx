@@ -1,12 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { handlePayment } from '../utils/votePayment';
 
-const VoteCalculator = ({ contestant, onClose }) => {
+const VoteCalculator = ({ contestant, onClose, votePrice, setVotePrice, serverUrl }) => {
   const [votes, setVotes] = useState('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-  const pricePerVote = 50; 
+
+  useEffect(() => {
+    // Fetch the vote price dynamically if needed (you can remove this if votePrice is passed in from a parent component)
+    const fetchVotePrice = async () => {
+      try {
+        const response = await fetch(`${serverUrl}/setting/getVotePrice`); // Adjust this endpoint
+        const data = await response.json();
+        setVotePrice(data.price);
+      } catch (error) {
+        console.error('Failed to fetch vote price:', error.message);
+      }
+    };
+
+    if (!votePrice) {
+      fetchVotePrice();
+    }
+  }, [votePrice, setVotePrice]);
 
   const handleVoteChange = (e) => {
     const value = e.target.value;
@@ -23,8 +39,8 @@ const VoteCalculator = ({ contestant, onClose }) => {
 
   const handleVoteSubmit = () => {
     if (votes > 0 && email && name) {
-      const totalAmount = Number(votes) * pricePerVote;
-      console.log(typeof(totalAmount));
+      const totalAmount = Number(votes) * votePrice; // Use dynamic votePrice
+      console.log(typeof totalAmount);
 
       Swal.fire({
         title: 'Confirm Payment',
@@ -64,7 +80,7 @@ const VoteCalculator = ({ contestant, onClose }) => {
   return (
     <div className="vote-for-contestant">
       <h3 className="text-lg font-semibold mb-4">Vote for {contestant.username}</h3>
-      <p className="text-gray-600 mb-2">Each vote costs ₦50</p>
+      <p className="text-gray-600 mb-2">Each vote costs ₦{votePrice}</p>
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="votes">
           Number of Votes:

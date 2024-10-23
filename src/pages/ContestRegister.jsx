@@ -5,7 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Toast from "../utils/utils";
 import { Link, useNavigate } from "react-router-dom";
 
-const ContestRegister = () => {
+const ContestRegister = ({serverUrl}) => {
   const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -32,6 +32,7 @@ const ContestRegister = () => {
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
+  
 
   const navigate = useNavigate();
   const handleRegister = async (e) => {
@@ -71,7 +72,7 @@ const ContestRegister = () => {
 
     // Proceed to fetch request if validation passes
     try {
-      const response = await fetch("https://new-era-server-five.vercel.app/contestant-auth/register", {
+      const response = await fetch(`${serverUrl}/contestant-auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

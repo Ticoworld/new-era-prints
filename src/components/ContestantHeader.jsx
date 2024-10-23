@@ -32,7 +32,7 @@ const ContestantHeader = () => {
         {/* Logo */}
         <Link to="/" className="text-2xl font-bold text-customBlue">
           <img
-            src="/path/to/logo.png" // Replace with your logo path
+            src="/images/logo.png" // Replace with your logo path
             alt="Logo"
             className="h-8 w-auto"
           />

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Loader from "../components/Loader";
 
-const CheckoutPage = () => {
+const CheckoutPage = ({serverUrl}) => {
   const [billingAddress, setBillingAddress] = useState({
     name: "",
     email: "",
@@ -23,7 +23,7 @@ const CheckoutPage = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem("Usertoken");
-        const response = await fetch(`https://new-era-server-five.vercel.app/user/getdata`, {
+        const response = await fetch(`${serverUrl}/user/getdata`, {
           headers: { "x-access-token": token },
         });
         const data = await response.json();
@@ -57,6 +57,30 @@ const CheckoutPage = () => {
     return Object.values(billingAddress).every((field) => field.trim() !== "");
   };
 
+  const updateOrder = async()=>{
+    try {
+        const token = localStorage.getItem('Usertoken');
+    const response = await fetch(`${serverUrl}/user/createOrder`,{
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        "x-access-token": token
+      }, 
+      body: JSON.stringify({
+        products: products, 
+        billingAddress: billingAddress,
+        total: total
+      })
+    });
+    const data = await response.json();
+    if(data.success) {
+      console.log('');
+    }
+    } catch (error) {
+      
+    }
+  }
+
   const handlePlaceOrder = () => {
     if (!validateBillingAddress()) {
       Swal.fire({
@@ -78,7 +102,9 @@ const CheckoutPage = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, place order!",
     }).then((result) => {
-      if (result.isConfirmed) {
+      if (result.isConfirmed) { 
+        
+        updateOrder()
         // Construct the message for WhatsApp
         const orderMessage = `
         Hello, I would like to place an order. Here are my details and the items I want to purchase:
