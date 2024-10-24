@@ -12,7 +12,7 @@ const Login = ({serverUrl}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [errorPassword, setErrorPassword] = useState("");
   const [loading, setLoading] = useState(false); // Loading state
-
+  console.log(serverUrl);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
