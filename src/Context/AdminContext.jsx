@@ -13,6 +13,8 @@ const AdminProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const serverUrl = import.meta.env.VITE_API_BASE_URL;
+
   // Fetch all data function
   const fetchData = async () => {
     const token = localStorage.getItem('AdminToken'); // Get token from localStorage
@@ -30,31 +32,31 @@ const AdminProvider = ({ children }) => {
           'x-access-token': token,
 
       };
-      const usersResponse = await fetch('http://localhost:3000/admin/users', {headers});
+      const usersResponse = await fetch(`${serverUrl}/admin/users`, {headers});
       if (!usersResponse.ok) throw new Error('Failed to fetch users');
       const usersData = await usersResponse.json();
       setUsers(usersData);
 
       // Fetch all contestants
-      const contestantsResponse = await fetch('http://localhost:3000/admin/contestants', {headers});
+      const contestantsResponse = await fetch(`${serverUrl}/admin/contestants`, {headers});
       if (!contestantsResponse.ok) throw new Error('Failed to fetch contestants');
       const contestantsData = await contestantsResponse.json();
       setContestants(contestantsData);
 
       // Fetch all awaiting orders with associated users
-      const awaitingOrdersResponse = await fetch('http://localhost:3000/admin/orders/awaiting', {headers});
+      const awaitingOrdersResponse = await fetch(`${serverUrl}/admin/orders/awaiting`, {headers});
       if (!awaitingOrdersResponse.ok) throw new Error('Failed to fetch awaiting orders');
       const awaitingOrdersData = await awaitingOrdersResponse.json();
       setAwaitingOrders(awaitingOrdersData);
 
       // Fetch all pending orders with associated users
-      const pendingOrdersResponse = await fetch('http://localhost:3000/admin/orders/pending' , {headers});
+      const pendingOrdersResponse = await fetch(`${serverUrl}/admin/orders/pending` , {headers});
       if (!pendingOrdersResponse.ok) throw new Error('Failed to fetch pending orders');
       const pendingOrdersData = await pendingOrdersResponse.json();
       setPendingOrders(pendingOrdersData);
 
       // Fetch all completed orders with associated users
-      const completedOrdersResponse = await fetch('http://localhost:3000/admin/orders/completed' , {headers});
+      const completedOrdersResponse = await fetch(`${serverUrl}/admin/orders/completed` , {headers});
       if (!completedOrdersResponse.ok) throw new Error('Failed to fetch completed orders');
       const completedOrdersData = await completedOrdersResponse.json();
       setCompletedOrders(completedOrdersData);
