@@ -12,7 +12,6 @@ const Login = ({serverUrl}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [errorPassword, setErrorPassword] = useState("");
   const [loading, setLoading] = useState(false); // Loading state
-  console.log(serverUrl);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -21,7 +20,7 @@ const Login = ({serverUrl}) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     // Check if password is empty
     if (password === "") {
       setErrorPassword("Password cannot be empty");
@@ -29,9 +28,9 @@ const Login = ({serverUrl}) => {
     } else {
       setErrorPassword(""); // Clear the error message
     }
-
+  
     setLoading(true); // Start loading
-
+  
     try {
       const response = await fetch(`${serverUrl}/user-auth/login`, {
         method: "POST",
@@ -43,18 +42,31 @@ const Login = ({serverUrl}) => {
           password,
         }),
       });
+  
       const res = await response.json();
       setLoading(false);
-
+  
       if (res.success === true) {
+        // Store token and expiration time in localStorage
         localStorage.setItem("Usertoken", res.token);
-        localStorage.setItem("expiresAt", res.expirationTime * 1000); // Store the expiration time in milliseconds
+        localStorage.setItem("expiresAt", res.expirationTime * 1000); // Store in milliseconds
+  
         Toast.fire({
           icon: "success",
           title: "Login Successful",
         });
+  
+        // Redirect user to the shop page after successful login
         navigate("/shop");
+      } else if (res.message === "Account is not verified. Please verify your account before logging in.") {
+        // Handle the case where the account is not verified
+        Toast.fire({
+          icon: "warning",
+          title: res.message,
+        }); 
+        navigate('/verify-email')
       } else {
+        // Handle any other login errors (e.g., invalid credentials)
         Toast.fire({
           icon: "error",
           title: res.message,
@@ -63,8 +75,14 @@ const Login = ({serverUrl}) => {
     } catch (error) {
       setLoading(false); // Stop loading
       console.log({ Error: error });
+  
+      Toast.fire({
+        icon: "error",
+        title: "An error occurred during login. Please try again.",
+      });
     }
   };
+  
 
   return (
     <div>

@@ -55,10 +55,20 @@ const ContestLogin = ({serverUrl}) => {
           });
           navigate("/contestantpage");
       } else {
-        Toast.fire({
-          icon: "error",
-          title: res.message,
-        });
+        // Handle specific case for unverified accounts
+        if (res.message === "Account is not verified. Please verify your account before logging in.") {
+          Toast.fire({
+            icon: "warning",
+            title: res.message,
+          });
+          navigate('/contest-verify-email')
+        } else {
+          // Handle other errors (e.g., invalid credentials)
+          Toast.fire({
+            icon: "error",
+            title: res.message,
+          });
+        }
       }
     } catch (error) {
       setLoading(false); // Stop loading
