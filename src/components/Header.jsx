@@ -23,6 +23,28 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [theme, setTheme] = useState(null);
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.innerHTML = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "New Era Digital Prints",
+      "url": "https://www.neweradigitalprints.net",
+      "logo": "https://www.neweradigitalprints.net/images/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+2348136779436",
+        "contactType": "Customer Service"
+      }
+    });
+    document.head.appendChild(script);
+    
+    return () => {
+      document.head.removeChild(script); // Cleanup script on unmount
+    };
+  }, []);
+
   useEffect(() => { 
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme) {
@@ -78,12 +100,15 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="header w-full  dark:bg-customBlack bg-customBlue sticky top-0 z-[100]">
+    <header className="header w-full  dark:bg-customBlack bg-customBlue sticky top-0 z-[100]">
       <div className="flex flex-col lg:flex-row justify-between items-center lg:px-12 px-4">
         <div className="lg:hidden flex justify-between items-center w-full py-4">
-          <div className="logo font-kavoon text-xl text-customWhite">
-            <img src="/images/logo.png" alt="" className="w-24" />
+          <Link to="/">
+          <div className="logo text-xl text-customWhite">
+            <img src="/images/logo.png" alt="New Era Digital Prints logo" className="w-24" />
           </div>
+          </Link>
+          
           <div className="flex items-center">
             <div className="relative mr-2">
               <input
@@ -116,7 +141,7 @@ const Header = () => {
           style={{ zIndex: 1000 }} // Ensure nav is on top
         >
           <ul className="flex flex-col lg:flex-row text-gray-950 justify-between gap-7 text-sm p-5 lg:p-0">
-            <Link to="/">
+            <Link to="/" title="Home - Custom Prints">
               <li className="lg:py-5 py-2 border-b lg:border-b-0 px-2 dark:text-customWhite hover:text-customWhite transition-colors dark:hover:text-customBlue duration-300 cursor-pointer">
                 {isMenuOpen && <FiHome className="inline-block mr-2" />}Home
               </li>
@@ -175,9 +200,12 @@ const Header = () => {
           )}
         </nav>
         <div className="hidden lg:flex items-center w-[50%] justify-between">
-          <div className="logo font-kavoon text-xl text-customWhite justify-start">
-            <img src="/images/logo.png" alt="" className="w-24 " />
+          <Link to="/">
+          <div className="logo text-xl text-customWhite justify-start">
+            <img src="/images/logo.png" alt="New Era Digital Prints logo" className="w-24 " />
           </div>
+          </Link>
+          
           <div className="flex">
             <div className="relative ml-4 flex items-center">
               <input
@@ -200,7 +228,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
