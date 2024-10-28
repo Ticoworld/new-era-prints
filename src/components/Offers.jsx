@@ -67,7 +67,7 @@ const Offers = () => {
       ref={offersRef}
       className="bg-customWhite dark:bg-black  min-h-screen overflow-hidden py-14">
         <Helmet>
-        <title>Our Offers - New Era Digital Prints</title>
+        <title>New Era Digital Prints</title>
         <meta name="description" content="Explore our custom printing offers including business cards, marketing materials, and more. Quality printing at affordable prices." />
       </Helmet>
       <div className="flex justify-center items-center">
