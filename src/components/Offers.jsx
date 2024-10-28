@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-
+import { HelmetProvider, Helmet } from "react-helmet-async";
 const Offers = () => {
   const [startAnimation, setStartAnimation] = useState(false);
   const offersRef = useRef(null);
@@ -34,17 +34,9 @@ const Offers = () => {
     { id: 3, image: "/images/image3.jpeg", title: "Signs & Posters" },
     { id: 4, image: "/images/image4.jpeg", title: "Clothing & Bags" },
     { id: 5, image: "/images/image5.jpeg", title: "Design Services" },
-    {
-      id: 6,
-      image: "/images/image6.jpeg",
-      title: "Invitations & Stationery",
-    },
+    { id: 6, image: "/images/image6.jpeg",title: "Invitations & Stationery",},
     { id: 7, image: "/images/image7.jpeg", title: "Labels & Stickers" },
-    {
-      id: 8,
-      image: "/images/image8.jpeg",
-      title: "Photo Gifts & Calendar",
-    },
+    { id: 8,image: "/images/image8.jpeg",title: "Photo Gifts & Calendar",},
   ];
 
   const container = {
@@ -70,9 +62,14 @@ const Offers = () => {
   };
 
   return (
+    <HelmetProvider>
     <div
       ref={offersRef}
       className="bg-customWhite dark:bg-black  min-h-screen overflow-hidden py-14">
+        <Helmet>
+        <title>Our Offers - New Era Digital Prints</title>
+        <meta name="description" content="Explore our custom printing offers including business cards, marketing materials, and more. Quality printing at affordable prices." />
+      </Helmet>
       <div className="flex justify-center items-center">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
@@ -80,9 +77,8 @@ const Offers = () => {
           initial="hidden"
           animate={startAnimation ? "visible" : "hidden"}>
           {offersCard.map((offer, index) => (
-            <Link to="/shop">
+            <Link to="/shop" key={offer.id}>
               <motion.div
-                key={offer.id}
                 className="w-48 h-48 sm:w-64 sm:h-64 bg-white dark:shadow-white dark:shadow-sm shadow-lg rounded-lg p-4 text-center cursor-pointer overflow-hidden"
                 custom={index % 2 === 0 ? "left" : "right"}
                 variants={itemVariants}
@@ -103,14 +99,14 @@ const Offers = () => {
       </div>
 
       <Link to="/shop">
-        <h1
+        <h2
           className="font-semibold text-customBlue text-center pt-10 cursor-pointer"
           data-aos="fade-up">
           LETS GET STARTED
-        </h1>
+        </h2>
       </Link>
-      
     </div>
+    </HelmetProvider>
   );
 };
 

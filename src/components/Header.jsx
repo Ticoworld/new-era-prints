@@ -29,23 +29,23 @@ const Header = () => {
     script.innerHTML = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "New Era Digital Prints",
-      "url": "https://www.neweradigitalprints.net",
-      "logo": "https://www.neweradigitalprints.net/images/logo.png",
-      "contactPoint": {
+      name: "New Era Digital Prints",
+      url: "https://www.neweradigitalprints.net",
+      logo: "https://www.neweradigitalprints.net/images/logo.png",
+      contactPoint: {
         "@type": "ContactPoint",
-        "telephone": "+2348136779436",
-        "contactType": "Customer Service"
-      }
+        telephone: "+2348136779436",
+        contactType: "Customer Service",
+      },
     });
     document.head.appendChild(script);
-    
+
     return () => {
       document.head.removeChild(script); // Cleanup script on unmount
     };
   }, []);
 
-  useEffect(() => { 
+  useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme) {
       setTheme(storedTheme);
@@ -104,11 +104,15 @@ const Header = () => {
       <div className="flex flex-col lg:flex-row justify-between items-center lg:px-12 px-4">
         <div className="lg:hidden flex justify-between items-center w-full py-4">
           <Link to="/">
-          <div className="logo text-xl text-customWhite">
-            <img src="/images/logo.png" alt="New Era Digital Prints logo" className="w-24" />
-          </div>
+            <div className="logo text-xl text-customWhite">
+              <img
+                src="/images/logo.png"
+                alt="New Era Digital Prints logo"
+                className="w-24"
+              />
+            </div>
           </Link>
-          
+
           <div className="flex items-center">
             <div className="relative mr-2">
               <input
@@ -201,11 +205,15 @@ const Header = () => {
         </nav>
         <div className="hidden lg:flex items-center w-[50%] justify-between">
           <Link to="/">
-          <div className="logo text-xl text-customWhite justify-start">
-            <img src="/images/logo.png" alt="New Era Digital Prints logo" className="w-24 " />
-          </div>
+            <div className="logo text-xl text-customWhite justify-start">
+              <img
+                src="/images/logo.png"
+                alt="New Era Digital Prints logo"
+                className="w-24 "
+              />
+            </div>
           </Link>
-          
+
           <div className="flex">
             <div className="relative ml-4 flex items-center">
               <input
