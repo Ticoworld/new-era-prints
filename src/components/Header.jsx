@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 import {
   FiSearch,
   FiMenu,
@@ -99,8 +100,17 @@ const Header = () => {
     };
   }, []);
 
-  return (
+  return ( 
+    <HelmetProvider>
     <header className="header w-full  dark:bg-customBlack bg-customBlue sticky top-0 z-[100]">
+    <Helmet>
+    <title>New Era Digital Prints | Custom Printing Services</title>
+  <meta
+    name="description"
+    content="New Era Digital Prints offers custom printing services for various needs, ensuring high-quality results and excellent customer service. Explore our range of products and services to meet your printing requirements."
+  />
+</Helmet>
+
       <div className="flex flex-col lg:flex-row justify-between items-center lg:px-12 px-4">
         <div className="lg:hidden flex justify-between items-center w-full py-4">
           <Link to="/">
@@ -145,28 +155,28 @@ const Header = () => {
           style={{ zIndex: 1000 }} // Ensure nav is on top
         >
           <ul className="flex flex-col lg:flex-row text-gray-950 justify-between gap-7 text-sm p-5 lg:p-0">
-            <Link to="/" title="Home - Custom Prints">
+            <Link to="/" title="Home - New Era Digital Prints">
               <li className="lg:py-5 py-2 border-b lg:border-b-0 px-2 dark:text-customWhite hover:text-customWhite transition-colors dark:hover:text-customBlue duration-300 cursor-pointer">
                 {isMenuOpen && <FiHome className="inline-block mr-2" />}Home
               </li>
             </Link>
-            <Link to="/about">
+            <Link to="/about" title="About Us - New Era Digital Prints">
               <li className="lg:py-5 py-2 border-b lg:border-b-0 px-2 dark:text-customWhite hover:text-customWhite transition-colors dark:hover:text-customBlue duration-300 cursor-pointer">
                 {isMenuOpen && <FiInfo className="inline-block mr-2" />}About Us
               </li>
             </Link>
-            <Link to="/shop">
+            <Link to="/shop" title="Shop - New Era Digital Prints - Custom Prints">
               <li className="lg:py-5 py-2 border-b lg:border-b-0 px-2 dark:text-customWhite hover:text-customWhite transition-colors dark:hover:text-customBlue duration-300 cursor-pointer">
                 {isMenuOpen && <FiShoppingBag className="inline-block mr-2" />}
                 Shop
               </li>
             </Link>
-            <Link to="/magazine">
+            <Link to="/magazine" title="Magazine - New Era Digital Prints - Explore Our Insights">
               <li className="lg:py-5 py-2 border-b lg:border-b-0 px-2 dark:text-customWhite hover:text-customWhite transition-colors dark:hover:text-customBlue duration-300 cursor-pointer">
                 {isMenuOpen && <FiBook className="inline-block mr-2" />}Magazine
               </li>
             </Link>
-            <Link to="/contact">
+            <Link to="/contact" title="Contact Us - New Era Digital Prints - Get in Touch">
               <li className="lg:py-5 py-2 border-b lg:border-b-0 px-2 dark:text-customWhite hover:text-customWhite dark:hover:text-customBlue transition-colors duration-300 cursor-pointer">
                 {isMenuOpen && <FiPhone className="inline-block mr-2" />}Contact
                 Us
@@ -237,6 +247,7 @@ const Header = () => {
         </div>
       </div>
     </header>
+    </HelmetProvider>
   );
 };
 
