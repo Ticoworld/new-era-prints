@@ -133,7 +133,7 @@ const CheckoutPage = ({serverUrl}) => {
         const encodedMessage = encodeURIComponent(orderMessage);
 
         // Replace `ADMIN_PHONE_NUMBER` with the admin's WhatsApp number (in international format)
-        const whatsappLink = `https://wa.me/+2347026601550?text=${encodedMessage}`;
+        const whatsappLink = `https://wa.me/+2348136779436?text=${encodedMessage}`;
 
         // Open the WhatsApp link
         window.open(whatsappLink, "_blank");
