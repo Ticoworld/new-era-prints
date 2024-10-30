@@ -93,9 +93,7 @@ const CheckoutPage = ({serverUrl}) => {
 
     Swal.fire({
       title: "Place Order",
-      text: `Do you want to place an order with a total amount of ₦${total.toFixed(
-        2
-      )}?`,
+      text: `Do you want to place this order`,
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -118,12 +116,11 @@ const CheckoutPage = ({serverUrl}) => {
         *Products I Want to Buy:*
         ${products.map((product) => {
           return `
-            - ${product.quantity} x ${product.name} - ₦${product.price} each
+            - ${product.quantity} x ${product.name} -
             ${product.image ? `Image: ${product.image}` : ''}
           `;
         }).join("\n")}
       
-        *Total Amount: ₦${total.toFixed(2)}*
       
         Please confirm the order and let me know if you need any further details. Thank you!
       `;
@@ -185,13 +182,13 @@ const CheckoutPage = ({serverUrl}) => {
                         <div><img src={product.image} alt="" className="w-16 h-16"/></div>
                         </div>
                         
-                        <span>₦{(product.price * product.quantity).toFixed(2)}</span>
+                        {/* <span>₦{(product.price * product.quantity).toFixed(2)}</span> */}
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div className="mb-4 text-right">
-                  <p className="text-xl font-semibold text-gray-800 dark:text-gray-100">Total: ₦{total.toFixed(2)}</p>
+                  {/* <p className="text-xl font-semibold text-gray-800 dark:text-gray-100">Total: ₦{total.toFixed(2)}</p> */}
                 </div>
                 <button
                   onClick={handlePlaceOrder}

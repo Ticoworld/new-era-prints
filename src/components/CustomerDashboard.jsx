@@ -87,7 +87,7 @@ const CustomerDashboard = ({serverUrl}) => {
                 />
                 <div className="mt-4">
                   <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
-                  <p className="text-gray-600">₦{item.price.toFixed(2)}</p>
+                  {/* <p className="text-gray-600">₦{item.price.toFixed(2)}</p> */}
                   <button
                     onClick={() => addToCart(item)}
                     className="mt-2 bg-blue-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-blue-700 transition"

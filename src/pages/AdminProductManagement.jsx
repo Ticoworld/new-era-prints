@@ -5,7 +5,7 @@ const AdminProductManagement = ({serverUrl}) => {
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({
     name: "",
-    price: "",
+    // price: "",
     image: "",
   });
   const [editingProduct, setEditingProduct] = useState(null);
@@ -46,7 +46,9 @@ const AdminProductManagement = ({serverUrl}) => {
       const data = await response.json();
       if (data.success) {
         Swal.fire("Success", "Product added successfully!", "success");
-        setNewProduct({ name: "", price: "", image: ""});
+        setNewProduct({ name: "",
+        //  price: "", 
+         image: ""});
         fetchProducts();
       } else {
         Swal.fire("Error", data.message, "error");
@@ -154,7 +156,7 @@ const AdminProductManagement = ({serverUrl}) => {
                 setNewProduct({ ...newProduct, name: e.target.value })
               }
             />
-            <input
+            {/* <input
               type="number"
               className="p-2 border border-gray-300 rounded-lg"
               placeholder="Price"
@@ -162,7 +164,7 @@ const AdminProductManagement = ({serverUrl}) => {
               onChange={(e) =>
                 setNewProduct({ ...newProduct, price: e.target.value })
               }
-            />
+            /> */}
             <input
               type="text"
               className="p-2 border border-gray-300 rounded-lg"
@@ -196,19 +198,23 @@ const AdminProductManagement = ({serverUrl}) => {
                 />
                 <div className="mt-4">
                   <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
-                  <p className="text-gray-600">₦{item.price.toFixed(2)}</p>
-                  <button
+                  {/* <p className="text-gray-600">₦{item.price.toFixed(2)}</p> */}
+
+                  <div  className="flex justify-between items-center mt-1 gap-4">
+                    <button
                     onClick={() => setEditingProduct(item)}
-                    className="mt-2 bg-yellow-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-yellow-700 transition"
+                    className="mt-2 bg-yellow-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-yellow-700 transition flex-1"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDeleteProduct(item._id)}
-                    className="mt-2 bg-red-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-red-700 transition"
+                    className="mt-2 bg-red-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-red-700 transition flex-1"
                   >
                     Delete
                   </button>
+                  </div>
+                  
                 </div>
               </div>
             ))}
@@ -232,7 +238,7 @@ const AdminProductManagement = ({serverUrl}) => {
                   })
                 }
               />
-              <input
+              {/* <input
                 type="number"
                 className="p-2 border border-gray-300 rounded-lg"
                 placeholder="Price"
@@ -243,7 +249,7 @@ const AdminProductManagement = ({serverUrl}) => {
                     price: e.target.value,
                   })
                 }
-              />
+              /> */}
               <input
                 type="text"
                 className="p-2 border border-gray-300 rounded-lg"
@@ -253,17 +259,6 @@ const AdminProductManagement = ({serverUrl}) => {
                   setEditingProduct({
                     ...editingProduct,
                     image: e.target.value,
-                  })
-                }
-              />
-              <textarea
-                className="p-2 border border-gray-300 rounded-lg"
-                placeholder="Description"
-                value={editingProduct.description}
-                onChange={(e) =>
-                  setEditingProduct({
-                    ...editingProduct,
-                    description: e.target.value,
                   })
                 }
               />

@@ -3,11 +3,11 @@ import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import 'tailwindcss/tailwind.css';
 import Loader from "../components/Loader";
-
+import { useNavigate } from "react-router-dom";
 const Cart = ({serverUrl}) => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
-
+  const navigate = useNavigate()
   useEffect(() => {
     // Fetch cart items from backend on component mount
     const fetchCartItems = async () => {
@@ -87,7 +87,7 @@ const Cart = ({serverUrl}) => {
   };
 
   // Calculate total price
-  const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  // const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <div>
@@ -111,7 +111,7 @@ const Cart = ({serverUrl}) => {
                           />
                           <div>
                             <p className="text-lg font-medium text-gray-800">{item.name}</p>
-                            <p className="text-sm text-gray-600">${(item.price * item.quantity).toFixed(2)}</p>
+                            {/* <p className="text-sm text-gray-600">${(item.price * item.quantity).toFixed(2)}</p> */}
                             <div className="flex items-center mt-2">
                               <button
                                 onClick={() => decrementQuantity(index)}
@@ -145,12 +145,12 @@ const Cart = ({serverUrl}) => {
                     ))}
                   </ul>
                   <div className="mt-4 text-right">
-                    <p className="text-lg font-semibold text-gray-800">
+                    {/* <p className="text-lg font-semibold text-gray-800">
                       Total: ₦{totalPrice.toFixed(2)}
-                    </p>
+                    </p> */}
                     <button
                       className="mt-2 bg-green-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-green-700 transition"
-                      onClick={() => window.location.href = '/shop/checkout'}
+                      onClick={() => navigate('/shop/checkout')}
                     >
                       Proceed to Checkout
                     </button>
