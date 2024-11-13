@@ -11,7 +11,7 @@ import TopSellingItems from "../components/TopSellingItems";
 const About = () => {
   return <div>
     <Header />
-    <HeroSection showcaseImage="/images/showcase2.png" />
+    <HeroSection showcaseImage="https://res.cloudinary.com/dglky8nrs/image/upload/v1731501209/showcase2_ogxrkq.png" />
     <AboutUs />
     <FaceMagazineCard bgcolor="bg-customOrange"/>
     <TopSellingItems />

@@ -3,11 +3,11 @@ import { motion } from "framer-motion"; // Make sure to import motion
 import { BsArrowUpRight } from "react-icons/bs";
 import Button from "./Button";
 
-const HeroSection = ({ showcaseImage = "/images/showcase.png" }) => {
+const HeroSection = ({ showcaseImage = "https://res.cloudinary.com/dglky8nrs/image/upload/v1731501191/showcase_my8kb2.png" }) => {
   return (
     <div
       className="relative w-full h-[44rem] lg:h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/images/showcase-bg.jpeg')" }}
+      style={{ backgroundImage: "url('https://res.cloudinary.com/dglky8nrs/image/upload/v1731501206/showcase-bg_eblva8.jpg')" }}
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-gray-400 dark:bg-black opacity-90 dark:opacity-70"></div>

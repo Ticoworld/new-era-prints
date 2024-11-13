@@ -29,14 +29,14 @@ const Offers = () => {
   }, []);
 
   const offersCard = [
-    { id: 1, image: "/images/image1.jpeg", title: "Business Cards" },
-    { id: 2, image: "/images/image2.jpeg", title: "Marketing Materials" },
-    { id: 3, image: "/images/image3.jpeg", title: "Signs & Posters" },
-    { id: 4, image: "/images/image4.jpeg", title: "Clothing & Bags" },
-    { id: 5, image: "/images/image5.jpeg", title: "Design Services" },
-    { id: 6, image: "/images/image6.jpeg",title: "Invitations & Stationery",},
-    { id: 7, image: "/images/image7.jpeg", title: "Labels & Stickers" },
-    { id: 8,image: "/images/image8.jpeg",title: "Photo Gifts & Calendar",},
+    { id: 1, image: "https://res.cloudinary.com/dglky8nrs/image/upload/v1731501540/image1_oylfey.jpg", title: "Business Cards" },
+    { id: 2, image: "https://res.cloudinary.com/dglky8nrs/image/upload/v1731501540/image2_ekpk5z.jpg", title: "Marketing Materials" },
+    { id: 3, image: "https://res.cloudinary.com/dglky8nrs/image/upload/v1731501541/image3_invtti.jpg", title: "Signs & Posters" },
+    { id: 4, image: "https://res.cloudinary.com/dglky8nrs/image/upload/v1731501542/image4_jrk5wh.jpg", title: "Clothing & Bags" },
+    { id: 5, image: "https://res.cloudinary.com/dglky8nrs/image/upload/v1731501547/image5_b75uhl.jpg", title: "Design Services" },
+    { id: 6, image: "https://res.cloudinary.com/dglky8nrs/image/upload/v1731501539/image6_ukg6hr.jpg",title: "Invitations & Stationery",},
+    { id: 7, image: "https://res.cloudinary.com/dglky8nrs/image/upload/v1731501539/image7_gbakvp.jpg", title: "Labels & Stickers" },
+    { id: 8,image: "https://res.cloudinary.com/dglky8nrs/image/upload/v1731501540/image8_wlyora.jpg",title: "Photo Gifts & Calendar",},
   ];
 
   const container = {

@@ -4,15 +4,15 @@ import { useState, useEffect } from 'react';
 
 // Array of top-selling items with image names and titles
 const topSellingItems = [
-  { id: 1, img: '/images/business_card.jpeg', title: 'Business Cards' },
-  { id: 2, img: '/images/brochure.jpeg', title: 'Brochures' },
-  { id: 3, img: '/images/flyer.jpeg', title: 'Flyers' },
-  { id: 4, img: '/images/poster.jpg', title: 'Posters' },
-  { id: 5, img: '/images/banner.jpeg', title: 'Banners' },
-  { id: 6, img: '/images/booklet.jpg', title: 'Booklets' },
-  { id: 7, img: '/images/invitation.jpeg', title: 'invitation Card' },
-  { id: 8, img: '/images/calendar.jpeg', title: 'Calendars' },
-  { id: 9, img: '/images/magazine.jpeg', title: 'Magazine' },
+  { id: 1, img: 'https://res.cloudinary.com/dglky8nrs/image/upload/v1731520610/business_card_uf2c2d.jpg', title: 'Business Cards' },
+  { id: 2, img: 'https://res.cloudinary.com/dglky8nrs/image/upload/v1731520637/brochure_q7ajle.jpg', title: 'Brochures' },
+  { id: 3, img: 'https://res.cloudinary.com/dglky8nrs/image/upload/v1731520656/flyer_iyk21d.jpg', title: 'Flyers' },
+  { id: 4, img: 'https://res.cloudinary.com/dglky8nrs/image/upload/v1731520664/poster_fvj8mt.jpg', title: 'Posters' },
+  { id: 5, img: 'https://res.cloudinary.com/dglky8nrs/image/upload/v1731520669/banner_lldivo.jpg', title: 'Banners' },
+  { id: 6, img: 'https://res.cloudinary.com/dglky8nrs/image/upload/v1731520679/booklet_pnk3ud.jpg', title: 'Booklets' },
+  { id: 7, img: 'https://res.cloudinary.com/dglky8nrs/image/upload/v1731520721/invitation_muygcm.jpg', title: 'invitation Card' },
+  { id: 8, img: 'https://res.cloudinary.com/dglky8nrs/image/upload/v1731520740/calendar_j14yso.jpg', title: 'Calendars' },
+  { id: 9, img: 'https://res.cloudinary.com/dglky8nrs/image/upload/v1731520750/magazine_hwur0c.jpg', title: 'Magazine' },
 ];
 
 
